@@ -1,0 +1,11 @@
+:root {
+    
+    --color-background: rgb(246,225,243);
+    --color-background-header: rgb(231,204,232);
+    --color-text-heading: rgb(51,5,120);
+    --color-accent: rgb(0,99,2);
+    --color-text: rgb(43,43,43);
+    --color-link: var(--color-accent);
+    --font-heading: "Audiowide", serif;
+    
+}
