@@ -7,5 +7,6 @@
     --color-text: rgb(43,43,43);
     --color-link: var(--color-accent);
     --font-heading: "Audiowide", serif;
+    --font-text-body: "Montserrat", sans-serif;
     
 }
