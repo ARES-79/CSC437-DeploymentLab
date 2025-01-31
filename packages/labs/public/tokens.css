@@ -10,3 +10,14 @@
     --font-text-body: "Montserrat", sans-serif;
     
 }
+
+body.dark-mode {
+    --color-background-header: #101070;
+    --color-background: #00004d;
+    --color-text: #e8ffff;
+    --color-text-heading: rgb(204, 250, 135);
+    --color-accent: #ffa576;
+    --color-link: var(--color-accent);
+    --color-border: var(--color-link);
+}
+
