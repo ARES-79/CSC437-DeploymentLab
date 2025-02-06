@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Moirai+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Neonderthaw&display=swap');
+
+#brand-logo {
+    font-family: "Neonderthaw", serif;
+    font-size: clamp(3em, 2em + 4vw, 3.5em);
+    /* font-family: "Moirai One", cursive; */
+}
+
+/* nav {
+    justify-self: center;
+    display: flex;
+    column-gap: 1em;
+}
+
+nav > * {
+    border: 2px solid blue;
+    padding: 1em;
+    flex-basis: 0;
+  } */
+
+  
