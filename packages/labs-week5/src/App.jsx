@@ -14,12 +14,12 @@ function App(props) {
       if (id === task.id) {
         // use object spread to make a new object
         // whose `completed` prop has been inverted
+        console.log({ ...task, completed: !task.completed });
         return { ...task, completed: !task.completed };
       }
       return task;
     });
     setTaskList(updatedTasks);
-    console.log(updatedTasks[0]);
   }
 
   function deleteTask(id) {
