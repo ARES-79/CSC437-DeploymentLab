@@ -1,4 +1,7 @@
-import './Header.css'
+import React from 'react';
+import './Header.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse, faPenToSquare, faUser } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
     return (
@@ -7,12 +10,26 @@ function Header() {
             <div className='inline-flex flex-col items-center mx-auto'>
                 <h1 className='text-indigo-800 tracking-wide text-center' id="brand-logo">BurritoGram</h1>
                 <nav className='flex justify-evenly w-full mt-1'>
-                    {/* switch to be links later */}
-                    <p className="relative px-4 after:content-['|'] after:absolute after:-right-2 after:text-gray-400 last:after:content-none">
-                        Home</p>
-                    <p className="relative px-4 after:content-['|'] after:absolute after:-right-2 after:text-gray-400 last:after:content-none">
-                        Post</p>
-                    <p className="relative px-4">Profile</p>
+                    <button className='flex items-center gap-x-2'>
+                        <FontAwesomeIcon icon={faHouse} 
+                        title="Home" />
+                        <p>Home</p>
+                    </button>                    
+                    <div className="h-100% w-px bg-gray-400"></div>
+
+                    <button className='flex items-center gap-x-2'>
+                        <FontAwesomeIcon icon={faPenToSquare} 
+                        title="Post" />
+                        <p>Post</p>
+                    </button>    
+                    <div className="h-100% w-px bg-gray-400"></div>
+                    
+                    <button className='flex items-center gap-x-2'>
+                        <FontAwesomeIcon icon={faUser} 
+                        title="Profile" />
+                        <p>Profile</p>
+                    </button> 
+                    
                 </nav>
             </div>
         </header>
