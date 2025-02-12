@@ -34,7 +34,6 @@ export function GroceryPanel(props) {
     }
 
     async function fetchData(url) {
-        setError(null);
         setIsLoading(true);
         try{
             console.log("fetching data from " + url);
@@ -52,6 +51,7 @@ export function GroceryPanel(props) {
     }
 
     function handleDropdownChange(changeEvent) {
+        setError(null);
         setGroceryData([]);
         const url = changeEvent.target.value.trim(); 
         if (url) {
