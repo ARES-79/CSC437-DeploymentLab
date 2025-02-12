@@ -4,11 +4,12 @@ import AddTaskForm from './AddTaskForm';
 import './App.css';
 import { nanoid } from "nanoid";
 import Modal from './components/Modal';
+import { GroceryPanel } from './components/GroceryPanel';
 
 function App(props) {
   const INITIAL_TASK_LIST = props.tasks;
   const [taskList, setTaskList] = React.useState(INITIAL_TASK_LIST);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   function toggleTaskCompleted(id) {
     const updatedTasks = taskList.map((task) => {
@@ -68,6 +69,8 @@ function App(props) {
                 {taskListAsTodos}
               </ul>
           </section>
+
+          <GroceryPanel handleAddItemToList={addTaskAndClose}></GroceryPanel>
         
       </main> 
   );
