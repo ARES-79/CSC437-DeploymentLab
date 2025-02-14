@@ -33,7 +33,7 @@ function Header() {
 
             {/* Sidebar for larger screens */}
             <nav className="hidden md:flex md:flex-col md:items-start md:p-4 md:gap-y-4">
-                <h1 className="text-indigo-800 text-xl font-bold">BurritoGram</h1>
+                <h1 className="text-indigo-800" id="brand-logo">BurritoGram</h1>
                 <button className="flex items-center gap-x-2 w-full p-2 hover:bg-gray-100 rounded-md">
                     <FontAwesomeIcon icon={faHouse} title="Home" />
                     <p>Home</p>
