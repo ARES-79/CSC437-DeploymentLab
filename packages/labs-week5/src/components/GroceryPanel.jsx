@@ -1,8 +1,7 @@
 import React from "react";
 import './GroceryPanel.css';
 import { Spinner } from "./Spinner";
-import { groceryFetcher } from "./groceryFetcher";
-import { useState, useEffect } from 'react';
+import { useGroceryFetch } from "./useGroceryFetch";
 
 const MDN_URL = "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json";
 
@@ -17,59 +16,19 @@ function delayMs(ms) {
 }
 
 export function GroceryPanel(props) {
-    const [groceryData, setGroceryData] = React.useState([
-        {
-            name: "test item",
-            price: 12.3
-        },
-        {
-            name: "test item 2",
-            price: 0.5
-        }
-    ]);
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [error, setError] = React.useState(null);
+
     const [dropDownOption, setDropDownOption] = React.useState("MDN");
+
+    const { groceryData, isLoading, error } = useGroceryFetch(dropDownOption);
 
     function handleAddTodoClicked(item) {
         const todoName = `Buy ${item.name} (${item.price.toFixed(2)})`;
         props.handleAddItemToList(todoName);
     }
 
-    let isStale = false;
-    async function fetchData(url) {
-        setGroceryData([]);
-        setIsLoading(true);
-        try{
-            console.log("fetching data from " + url);
-            await delayMs(2000);
-            const data = await groceryFetcher.fetch(url,);
-            if (!isStale){
-                setGroceryData(data);
-            }
-        } catch (error) {
-            if (!isStale){
-                setError(`Could not get products: ${error}`);
-            }    
-        } 
-        if (!isStale){
-            setIsLoading(false);
-        }   
-    }
-
     function handleDropdownChange(changeEvent) {
-        setError(null);
-        setDropDownOption(changeEvent.target.value.trim())
-        // const url = changeEvent.target.value.trim(); 
-        // if (url) {
-        //     fetchData(url);
-        // }
+        setDropDownOption(changeEvent.target.value.trim());
     }
-
-    useEffect(() => {
-        fetchData(dropDownOption);
-        return () => { isStale = true };
-    }, [dropDownOption]);
 
     return (
         <div>
