@@ -1,6 +1,8 @@
 import React from "react";
 import './GroceryPanel.css';
 import { Spinner } from "./Spinner";
+import { groceryFetcher } from "./groceryFetcher";
+import { useState, useEffect } from 'react';
 
 const MDN_URL = "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json";
 
@@ -27,37 +29,47 @@ export function GroceryPanel(props) {
     ]);
     const [isLoading, setIsLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
+    const [dropDownOption, setDropDownOption] = React.useState("MDN");
 
     function handleAddTodoClicked(item) {
         const todoName = `Buy ${item.name} (${item.price.toFixed(2)})`;
         props.handleAddItemToList(todoName);
     }
 
+    let isStale = false;
     async function fetchData(url) {
+        setGroceryData([]);
         setIsLoading(true);
         try{
             console.log("fetching data from " + url);
             await delayMs(2000);
-            const response = await fetch(url,);
-            if (!response.ok) {
-                throw new Error(`HTTP error: ${response.status}`);
+            const data = await groceryFetcher.fetch(url,);
+            if (!isStale){
+                setGroceryData(data);
             }
-            const data = await response.json();
-            setGroceryData(data); 
         } catch (error) {
-            setError(`Could not get products: ${error}`);
+            if (!isStale){
+                setError(`Could not get products: ${error}`);
+            }    
         } 
-        setIsLoading(false);
+        if (!isStale){
+            setIsLoading(false);
+        }   
     }
 
     function handleDropdownChange(changeEvent) {
         setError(null);
-        setGroceryData([]);
-        const url = changeEvent.target.value.trim(); 
-        if (url) {
-            fetchData(url);
-        }
+        setDropDownOption(changeEvent.target.value.trim())
+        // const url = changeEvent.target.value.trim(); 
+        // if (url) {
+        //     fetchData(url);
+        // }
     }
+
+    useEffect(() => {
+        fetchData(dropDownOption);
+        return () => { isStale = true };
+    }, [dropDownOption]);
 
     return (
         <div>
@@ -65,11 +77,16 @@ export function GroceryPanel(props) {
             <label className="mb-4 flex gap-4 items-center">
                 Get prices from:
                 <select className="border border-gray-300 p-1 rounded-sm disabled:opacity-50"
-                 disabled={isLoading}
+                 disabled={false}
+                 value={dropDownOption}
                  onChange={handleDropdownChange}>
-                    <option value="">(None selected)</option>
+                    {/* <option value="">(None selected)</option>
                     <option value={MDN_URL}>MDN</option>
-                    <option value="invalid">Who knows?</option>
+                    <option value="invalid">Who knows?</option> */}
+                    <option value="MDN">MDN</option>
+                    <option value="Liquor store">Liquor store</option>
+                    <option value="Butcher">Butcher</option>
+                    <option value="whoknows">Who knows?</option>
                 </select>
                 {isLoading && <Spinner />}
                 {error && <p className="text-red-500"> Sorry, something went wrong.</p>}
