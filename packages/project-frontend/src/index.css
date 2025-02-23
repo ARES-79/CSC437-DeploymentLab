@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+p {
+    color: var(--color-text);
+}
