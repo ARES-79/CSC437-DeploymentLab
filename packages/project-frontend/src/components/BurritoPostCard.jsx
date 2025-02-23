@@ -2,19 +2,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
-import { faCircleUser} from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import "./BurritoPostCard.css";
+import { Link } from 'react-router';
 
-const BurritoPostCard = ({ username, image, title, description, rating, price, location }) => {
+const BurritoPostCard = ({ username, profileImage, image, title, description, rating, price, location }) => {
   return (
     <li className="burrito-card">
       {/* User Section */}
-      <div className="burrito-user">
-        <div className="burrito-user-icon">
-          <FontAwesomeIcon icon={faCircleUser} />
+      <Link to={`/profiles/${username}`} className="user">
+        <div>
+          {profileImage ? (
+            <img src={profileImage} alt={`${username}'s profile`} className="user-icon" />
+          ) : (
+            <FontAwesomeIcon icon={faCircleUser} className="user-icon" />
+          )}
         </div>
-        <span className="burrito-username">{username}</span>
-      </div>
+        <span className="username">{username}</span>
+      </Link>
 
       <img src={image} alt={title} className="burrito-image" />
 

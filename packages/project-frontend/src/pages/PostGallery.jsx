@@ -2,13 +2,14 @@ import { Link } from 'react-router';
 import './PostGallery.css'
 import BurritoPostCard from '../components/BurritoPostCard';
 
-export function PostGallery({ header, isLoading, fetchedPosts, isDarkMode, handleDarkModeToggle }) {
+export function PostGallery({ header, isLoading, fetchedPosts }) {
 
     const postElements = fetchedPosts.map((post) => (
         /* need to change when I add routing */
         <Link key={post.id} to={`/posts/${post.id}`}> 
             <BurritoPostCard 
                 username={post.username}
+                profileImage={post.profileImage}
                 image={post.image}
                 title={post.title}
                 description={post.description}

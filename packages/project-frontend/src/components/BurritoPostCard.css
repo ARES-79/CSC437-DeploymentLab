@@ -8,18 +8,18 @@
   /* max-width: 18.75rem; 300px */
 }
 
-.burrito-user {
+.user {
   display: flex;
   align-items: center;
   gap: 0.5rem; /* 8px */
   margin-bottom: 0.75rem; /* 12px */
 }
 
-.burrito-user-icon {
+.user-icon {
   width: 2rem; /* 32px */
   height: 2rem; /* 32px */
   border-radius: 50%;
-  background-color: var(--color-user-icon-bg);
+  object-fit: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +27,7 @@
   color: var(--color-text);
 }
 
-.burrito-username {
+.username {
   font-size: 1rem; /* 16px */
   color: var(--color-text);
 }
