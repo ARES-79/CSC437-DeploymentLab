@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import './PostGallery.css'
 import BurritoPostCard from '../components/BurritoPostCard';
 
-export function PostGallery({ isLoading, fetchedPosts, isDarkMode, handleDarkModeToggle }) {
+export function PostGallery({ header, isLoading, fetchedPosts, isDarkMode, handleDarkModeToggle }) {
 
     const postElements = fetchedPosts.map((post) => (
         /* need to change when I add routing */
@@ -20,13 +20,7 @@ export function PostGallery({ isLoading, fetchedPosts, isDarkMode, handleDarkMod
     ));
     return (
         <>
-            <h2 className="header"> Burrito Gallery </h2>
-            <label>
-                <input id="dm-checkBox" type="checkbox" autoComplete="off"
-                checked={isDarkMode}
-                onChange={handleDarkModeToggle} />
-                Dark mode
-            </label>
+            <h2 className="header"> {header} </h2>
             {isLoading && "Loading..."}
             <ul className="cards">
                 {postElements}

@@ -6,6 +6,7 @@ import sampleBurrito3 from '../assets/exBurritoImages/burrito3.jpeg';
 const POSTS = [
     {
         id: "0",
+        userId: "0",
         username: "username_1",
         image: sampleBurrito1,
         title: "Delicious Steak Burrito",
@@ -16,7 +17,9 @@ const POSTS = [
     },
     {
         id: "1",
+        userId: "1",
         username: "username_2",
+        profileImage: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
         image: sampleBurrito2,
         title: "Delicious Steak Burrito",
         description: "A tasty steak burrito with fresh ingredients and homemade salsa.",
@@ -26,6 +29,8 @@ const POSTS = [
     },
     {
         id: "2",
+        userId: "1",
+        profileImage: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
         username: "username_2",
         image: sampleBurrito3,
         title: "Delicious Steak Burrito",
@@ -35,6 +40,7 @@ const POSTS = [
     },
     {
         id: "3",
+        userId: "0",
         username: "username_1",
         image: sampleBurrito1,
         title: "Delicious Steak Burrito",
@@ -45,6 +51,7 @@ const POSTS = [
     },
     {
         id: "4",
+        userId: "0",
         username: "username_1",
         image: sampleBurrito1,
         title: "Delicious Steak Burrito",
@@ -59,18 +66,24 @@ const POSTS = [
  * an array of PostData
  *
  * @param postId {string} the image ID to fetch, or all of them if empty string
+ * @param userId {string} the user ID to fetch associated posts, or all of them if empty string
+ * 
+ * only postId or userId should be present, postId takes presedence
+ * 
  * @param delay {number} the number of milliseconds fetching will take
  * @returns {{isLoading: boolean, fetchedPosts}} fetch state and data
  */
-export function usePostFetching(postId, delay=1000) {
+export function usePostFetching(postId, userId, delay=1000) {
     const [isLoading, setIsLoading] = useState(true);
     const [fetchedPosts, setFetchedPosts] = useState([]);
     useEffect(() => {
         setTimeout(() => {
-            if (postId === "") {
+            if (postId === "" && userId === "") {
                 setFetchedPosts(POSTS);
-            } else {
+            } else if (postId !== "") {
                 setFetchedPosts(POSTS.filter((post) => post.id === postId));
+            } else {
+                setFetchedPosts(POSTS.filter((post) => post.userId === userId));
             }
             setIsLoading(false);
         }, delay);

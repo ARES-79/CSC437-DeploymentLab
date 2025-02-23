@@ -44,7 +44,7 @@ nav {
 }
 
 /* Button Styling */
-nav button {
+nav .nav-link  {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -54,7 +54,7 @@ nav button {
     cursor: pointer;
 }
 
-nav button p {
+nav .nav-link p {
     display: none;
 }
 
@@ -66,7 +66,7 @@ nav button p {
 
 /* Show button text on larger screens */
 @media (min-width: 500px) {
-    nav button p {
+    nav .nav-link p {
         display: inline;
     }
 }

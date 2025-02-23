@@ -1,0 +1,44 @@
+/* Add to your main CSS or use Tailwind for styling directly */
+.profile-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .profile-picture {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+  }
+  
+  .username-input,
+  .location-input {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin-left: 1rem;
+  }
+  
+  button {
+    background-color: #facc15; /* Tailwind yellow-400 */
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.25rem;
+  }
+  
+  button:hover {
+    background-color: #eab308; /* Tailwind yellow-500 */
+  }
+  
+  .save-changes {
+    margin-top: 1rem;
+  }
+  

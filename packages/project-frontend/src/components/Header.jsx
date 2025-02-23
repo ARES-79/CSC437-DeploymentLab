@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css';
+import { Link } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faPenToSquare, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,22 +10,20 @@ function Header() {
             <div className="header-container">
                 <h1 id="brand-logo">BurritoGram</h1>
                 <nav>
-                    <button>
-                        <FontAwesomeIcon icon={faHouse} title="Home" />
-                        <p>Home</p>
-                    </button>
-                    <div className="nav-divider"></div>
+                <Link to="/" className="nav-link">
+                    <FontAwesomeIcon icon={faHouse} title="Home" />
+                    <p>Home</p>
+                </Link>
 
-                    <button>
-                        <FontAwesomeIcon icon={faPenToSquare} title="Post" />
-                        <p>Post</p>
-                    </button>
-                    <div className="nav-divider"></div>
-                    
-                    <button>
-                        <FontAwesomeIcon icon={faUser} title="Profile" />
-                        <p>Profile</p>
-                    </button>
+                <Link to="/post" className="nav-link">
+                    <FontAwesomeIcon icon={faPenToSquare} title="Post" />
+                    <p>Post</p>
+                </Link>
+
+                <Link to="/profile" className="nav-link">
+                    <FontAwesomeIcon icon={faUser} title="Profile" />
+                    <p>Profile</p>
+                </Link>
                 </nav>
             </div>
         </header>
