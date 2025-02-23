@@ -28,7 +28,7 @@ svg {
 
 /* Styling for the brand logo */
 #brand-logo {
-    color: var(--color-text-logo); /* Equivalent to Tailwind's text-indigo-800 */
+    color: var(--color-text-heading);
     letter-spacing: 0.05em;
     text-align: center;
     font-family: var(--font-logo);

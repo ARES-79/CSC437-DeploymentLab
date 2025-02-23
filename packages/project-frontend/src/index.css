@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+body {
+    background: var(--color-background);
+}
+
 p {
     color: var(--color-text);
+}
+
+.header { 
+    font-size: 2.5rem; /* Adjust the size */
+    font-weight: 600; /* Bold font weight */
+    text-align: center;
+    color: var(--color-text-heading); /* Applying the variable */
+    margin-bottom: 1.5rem;
 }

@@ -1,14 +1,15 @@
 :root {
     --color-background: #FAFAFA;
     --color-component-background: #EDEDED;
-    --color-text-logo: #4F46E6;
+    --color-accent:#4F46E6;  
+    --color-text-heading: var(--color-accent);
     --color-text: #2B2B2B;
     --color-nav-divider: #9ca3af;
     --font-logo: "Neonderthaw", serif;
     --font-text-body: "Montserrat", sans-serif;
     --color-shadow: rgba(0, 0, 0, 0.1);
     --color-default-star: #ccc;
-    --color-filled-star: var(--color-text-logo);
+    --color-filled-star: var(--color-accent);
     
 }
 
@@ -18,7 +19,8 @@ body.dark-mode {
     --color-component-background: #303030;
     --color-text: #FAFAFA;
     --color-nav-divider: #FAFAFA;
-    --color-text-logo: #54E3EB;
+    --color-accent: #54E3EB;
+    --color-text-heading: var(--color-accent);
     --color-shadow: rgba(255, 255, 255, 0.1);
-    --color-filled-star: var(--color-text-logo);
+    --color-filled-star: var(--color-accent);
 }
