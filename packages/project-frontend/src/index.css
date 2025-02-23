@@ -4,7 +4,7 @@ body {
     background: var(--color-background);
 }
 
-p {
+p, label {
     color: var(--color-text);
 }
 

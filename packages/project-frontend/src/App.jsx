@@ -1,11 +1,12 @@
-import { useState } from 'react'
 import React from 'react';
+import { useState } from 'react'
 import './App.css'
 import { PostGallery } from './pages/PostGallery';
 import { usePostFetching } from "./utils/usePostFetching.js";
+import { Routes, Route } from "react-router";
+import { MainLayout } from "./pages/MainLayout.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
   const [isDarkMode, setIsDarkMode] = useState(false);
   const { isLoading, fetchedPosts } = usePostFetching("");
 
@@ -20,19 +21,16 @@ function App() {
     }
   };
 
-  return (
-    <> 
-      
-      <label>
-          <input id="dm-checkBox" type="checkbox" autoComplete="off"
-           checked={isDarkMode}
-           onChange={handleDarkModeToggle} />
-          Dark mode
-      </label>
-      <PostGallery isLoading={isLoading} fetchedPosts={fetchedPosts}/>
-      
-    </>
-  )
+  const POSSIBLE_ROUTES =
+    <Routes>
+      <Route path="/" element={<MainLayout/>} >
+        <Route path="/*" element={
+          <PostGallery isLoading={isLoading} fetchedPosts={fetchedPosts} 
+          isDarkMode={isDarkMode} handleDarkModeToggle={handleDarkModeToggle}/>} />
+        </Route>
+    </Routes>
+
+    return POSSIBLE_ROUTES;
 }
 
 export default App
