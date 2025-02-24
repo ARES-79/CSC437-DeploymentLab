@@ -10,11 +10,11 @@ import { useEffect, useState } from "react";
  * @param initialImageUrl {string} The initial image URL to display before generation.
  * @returns {object} { generateImage: function to trigger image generation, imageUrl: the generated image URL }
  */
-export function useImageGeneration(width = 300, height = 200, placeholderText = "Your Image Here", initialImageUrl = "") {
+export function useImageGeneration(width = 300, height = 200, initialImageUrl = "") {
     const [imageUrl, setImageUrl] = useState(initialImageUrl);
 
     // Function to generate the image when triggered
-    const generateImage = () => {
+    const generateImage = (placeholderText) => {
         const url = `https://place-hold.it/${width}x${height}.png/${Math.floor(Math.random() * 16777215).toString(16)}/ffffff?text=${encodeURIComponent(placeholderText)}`;
         setImageUrl(url);
     };

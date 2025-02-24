@@ -13,8 +13,9 @@ const PostCreation = ({ onSubmit }) => {
     const [restaurant, setRestaurant] = useState("");
     const [error, setError] = useState("");
     const [imageCounter, setImageCounter] = useState(0);
+    const  placeholderImageText = `Your Image ${imageCounter}`;
 
-    const { generateImage, imageUrl, setImageUrl } = useImageGeneration(400, 500, `Your Image ${imageCounter}`, undefined);
+    const { generateImage, imageUrl, setImageUrl } = useImageGeneration(400, 500, undefined);
 
     // const handleImageUpload = (e) => {
     //     const file = e.target.files[0];
@@ -50,7 +51,7 @@ const PostCreation = ({ onSubmit }) => {
         setTitle("");
         setDescription("");
         setImageUrl(""); // This will reset the image to undefined
-        // setImageCounter(imageCounter + 1);
+        setImageCounter(imageCounter + 1);
         setIngredients("");
         setPrice("");
         setLocation("");
@@ -140,7 +141,7 @@ const PostCreation = ({ onSubmit }) => {
                 <label>Upload Image:</label>
                 {/* <input type="file" accept="image/*" onChange={handleImageUpload} /> */}
                 <button type="button"
-                    onClick={generateImage} // Trigger image generation on button click
+                    onClick={() => generateImage(placeholderImageText)} // Trigger image generation on button click
                 >
                     Upload File
                 </button>
