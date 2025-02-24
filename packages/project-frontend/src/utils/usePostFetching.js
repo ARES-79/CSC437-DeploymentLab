@@ -10,10 +10,12 @@ const POSTS = [
         username: "username_1",
         image: sampleBurrito1,
         title: "Delicious Steak Burrito",
-        description: "A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa.",
+        description: "A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.",
+        type: "purchased",
         rating: "4",
         price: "8.99",
-        location: "San Diego, CA"
+        location: "San Diego, CA",
+        restaurant: "Restaurant ABC"
     },
     {
         id: "1",
@@ -23,9 +25,11 @@ const POSTS = [
         image: sampleBurrito2,
         title: "Delicious Steak Burrito",
         description: "A tasty steak burrito with fresh ingredients and homemade salsa.",
+        type: "purchased",
         rating: "3",
         price: "10.99",
-        location: "San Diego, CA"
+        location: "San Diego, CA",
+        restaurant: "Restaurant 123"
     },
     {
         id: "2",
@@ -34,9 +38,10 @@ const POSTS = [
         username: "username_2",
         image: sampleBurrito3,
         title: "Delicious Steak Burrito",
+        ingredients: ["tomato", "lettuce", "cheese", "beef"],
+        type: "homemade",
         description: "A tasty steak burrito with fresh ingredients and homemade salsa.",
-        rating: "4",
-        location: "Homemade"
+        rating: "4"
     },
     {
         id: "3",
@@ -45,9 +50,12 @@ const POSTS = [
         image: sampleBurrito1,
         title: "Delicious Steak Burrito",
         description: "A tasty steak burrito with fresh ingredients and homemade salsa.",
+        type: "purchased",
+        ingredients: ["avocado", "sour cream", "chicken", "beans"],
         rating: "2",
         price: "8.99",
-        location: "San Diego, CA"
+        location: "San Diego, CA",
+        restaurant: "Restaurant 123"
     },
     {
         id: "4",
@@ -57,7 +65,8 @@ const POSTS = [
         title: "Delicious Steak Burrito",
         description: "A tasty steak burrito with fresh ingredients and homemade salsa.",
         rating: "5",
-        location: "Homemade"
+        type: "homemade",
+        ingredients: ["guacamole", "jalapenos", "onions"]
     }
 ];
 

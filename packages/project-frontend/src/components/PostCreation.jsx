@@ -46,7 +46,7 @@ const PostCreation = ({ user, onSubmit }) => {
             title,
             description,
             imageUrl,
-            ingredients: ingredients.split(",").map(ing => ing.trim()), // Convert comma-separated tags to array
+            ingredients: ingredients.split(",").map(ingr => ingr.trim()), // Convert comma-separated ingredients to array
             type,
             ...(type === "purchased" && { price, location, restaurant }), // Include only if purchased
         };

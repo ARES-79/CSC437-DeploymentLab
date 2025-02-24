@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 
 const BurritoPostCard = ({ post, currentUserId, expandedContent }) => {
   
-  const { userId, username, profileImage, image, title, description, rating, price, location } = post
+  const { userId, username, profileImage, image, title, description, type, rating, price, location, restaurant, ingredients } = post
   const userProfileLink = userId === currentUserId
     ? "/profile"  // If the post's userId is the current user's, link to /profile
     : `/profiles/${userId}`; 
@@ -44,12 +44,25 @@ const BurritoPostCard = ({ post, currentUserId, expandedContent }) => {
         <span className="burrito-rating-text">{rating}/5</span>
       </div>
 
-      <p className="burrito-description">{description}</p>
+      <p className={expandedContent ? "burrito-description" : "burrito-description-clamped"}>
+        {description}</p>
 
       <div className="burrito-details">
-        {price && <span className="burrito-price">${price}</span>}
-        <span className="burrito-location">{location}</span>
+        <span className="burrito-price">{price ? `$${price}` : ""}</span>
+        <span className="burrito-location">{type === "purchased" ? location: "Homemade"}</span>
       </div>
+
+      {expandedContent && (
+            <div className="expanded-content">
+              {restaurant && <p className="burrito-restaurant">Restaurant: {restaurant}</p>}
+              {ingredients && (
+                <p className="burrito-ingredients">
+                  Ingredients: {ingredients.join(", ")}
+                </p>
+              )}
+            </div>
+          )}
+
       </Link>
     </li>
   );
