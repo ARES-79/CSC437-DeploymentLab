@@ -6,11 +6,17 @@ import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import "./BurritoPostCard.css";
 import { Link } from 'react-router';
 
-const BurritoPostCard = ({ username, profileImage, image, title, description, rating, price, location }) => {
+const BurritoPostCard = ({ post, currentUserId }) => {
+  
+  const { userId, username, profileImage, image, title, description, rating, price, location } = post
+  const userProfileLink = userId === currentUserId
+    ? "/profile"  // If the post's userId is the current user's, link to /profile
+    : `/profiles/${userId}`; 
+  
   return (
     <li className="burrito-card">
       {/* User Section */}
-      <Link to={`/profiles/${username}`} className="user">
+      <Link to={userProfileLink} className="user">
         <div>
           {profileImage ? (
             <img src={profileImage} alt={`${username}'s profile`} className="user-icon" />
@@ -21,6 +27,7 @@ const BurritoPostCard = ({ username, profileImage, image, title, description, ra
         <span className="username">{username}</span>
       </Link>
 
+      <Link to={`/posts/${post.id}`}>     
       <img src={image} alt={title} className="burrito-image" />
 
       <h2 className="burrito-title">{title}</h2>
@@ -43,6 +50,7 @@ const BurritoPostCard = ({ username, profileImage, image, title, description, ra
         {price && <span className="burrito-price">${price}</span>}
         <span className="burrito-location">{location}</span>
       </div>
+      </Link>
     </li>
   );
 };

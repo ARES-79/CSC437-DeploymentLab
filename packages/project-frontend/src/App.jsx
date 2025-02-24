@@ -39,9 +39,10 @@ function App() {
     <Routes>
       <Route path="/" element={<MainLayout/>} >
         <Route path="/" element={
-          <PostGallery header="Burrito Discovery Gallery" isLoading={isLoading} fetchedPosts={fetchedPosts} />} />
+          <PostGallery header="Burrito Discovery Gallery" currentUserId={user.userId}
+             isLoading={isLoading} fetchedPosts={fetchedPosts} />} />
         <Route path="/profile" element={
-          <Profile user={user} updateUser={updateUser} 
+          <Profile user={user} updateUser={updateUser}  
             isDarkMode={user.darkMode} handleDarkModeToggle={handleDarkModeToggle} />} />
       </Route>
     </Routes>
