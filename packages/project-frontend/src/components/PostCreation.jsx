@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import "./PostCreation.css";
 import { useImageGeneration } from "../utils/useImageGeneration";
 
-const PostCreation = ({ onSubmit }) => {
+const PostCreation = ({ user, onSubmit }) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     // const [image, setImage] = useState(null);
     const [ingredients, setIngredients] = useState("");
     const [type, setType] = useState("homemade"); // "homemade" or "purchased"
     const [price, setPrice] = useState("");
-    const [location, setLocation] = useState("");
+    const [location, setLocation] = useState(user?.location || '');
     const [restaurant, setRestaurant] = useState("");
     const [error, setError] = useState("");
     const [imageCounter, setImageCounter] = useState(0);
@@ -39,6 +39,10 @@ const PostCreation = ({ onSubmit }) => {
         setError("");
 
         const newPost = {
+            //post id will have to be generated
+            userId: user.userId,
+            username: user.username,
+            profileImage: user.profileImage,
             title,
             description,
             imageUrl,

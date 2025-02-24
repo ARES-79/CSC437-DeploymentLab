@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router";
 import { MainLayout } from "./pages/MainLayout.jsx";
 import { PostGallery } from './pages/PostGallery';
 import { CreatePostPage } from './pages/CreatPostPage.jsx';
+import { PostDetails } from './pages/PostDetails.jsx';
 
 function App() {
   const { isLoading, fetchedPosts } = usePostFetching("", "");
@@ -43,15 +44,16 @@ function App() {
       <Route path="/" element={<MainLayout />} >
         <Route path="/" element={
           <PostGallery header="Burrito Discovery Gallery" currentUserId={user.userId}
-            isLoading={isLoading} fetchedPosts={fetchedPosts} />} />
+            isLoading={isLoading} fetchedPosts={fetchedPosts} expandedContent={false} />} />
         <Route path="/post" element={
-          <CreatePostPage/>} />
+          <CreatePostPage user={user}/>} />
         <Route path="/profile" element={
           <Profile user={user} updateUser={updateUser}
             isDarkMode={user.darkMode} handleDarkModeToggle={handleDarkModeToggle} />} />
         <Route path="/profiles/:userId" element={
           <Profile user={user} />} />
-
+        <Route path="/posts/:postId" element={
+          <PostDetails />} />
       </Route>
     </Routes>
 

@@ -1,6 +1,6 @@
 import PostCreation from "../components/PostCreation";
 
-export const CreatePostPage = () => {
+export const CreatePostPage = ({user}) => {
     const handlePostSubmit = (postData) => {
         console.log("New post submitted:", postData);
         // Send to backend API or update state
@@ -8,7 +8,7 @@ export const CreatePostPage = () => {
 
     return (
         <>
-            <PostCreation onSubmit={handlePostSubmit} />
+            <PostCreation user={user} onSubmit={handlePostSubmit} />
         </>
     );
 };

@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import './PostGallery.css'
 import BurritoPostCard from '../components/BurritoPostCard';
 
-export function PostGallery({ header, currentUserId, isLoading, fetchedPosts }) {
+export function PostGallery({ header, currentUserId, isLoading, fetchedPosts, expandedContent }) {
 
     const postElements = fetchedPosts.map((post) => (
         /* need to change when I add routing */
@@ -11,6 +11,7 @@ export function PostGallery({ header, currentUserId, isLoading, fetchedPosts }) 
                 key={post.id}
                 post={post}
                 currentUserId={currentUserId}
+                expandedContent={expandedContent}
             />
         // </Link>
     ));

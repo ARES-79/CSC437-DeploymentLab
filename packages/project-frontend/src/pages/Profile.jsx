@@ -24,7 +24,8 @@ const ProfilePage = ({ user: currentUser, updateUser, isDarkMode, handleDarkMode
 
             <PostGallery header={isCurrentUser ? "My Posts" : `${username}\'s Posts`}
                 currentUserId={currentUser.userId}
-                isLoading={isLoading} fetchedPosts={fetchedPosts} />
+                isLoading={isLoading} fetchedPosts={fetchedPosts} 
+                expandedContent={false}/>
 
         </>
     );

@@ -6,7 +6,7 @@ import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import "./BurritoPostCard.css";
 import { Link } from 'react-router';
 
-const BurritoPostCard = ({ post, currentUserId }) => {
+const BurritoPostCard = ({ post, currentUserId, expandedContent }) => {
   
   const { userId, username, profileImage, image, title, description, rating, price, location } = post
   const userProfileLink = userId === currentUserId
