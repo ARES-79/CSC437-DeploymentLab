@@ -13,7 +13,7 @@ const PostCreation = ({ user, onSubmit }) => {
     const [restaurant, setRestaurant] = useState("");
     const [error, setError] = useState("");
     const [imageCounter, setImageCounter] = useState(0);
-    const  placeholderImageText = `Your Image ${imageCounter}`;
+    const placeholderImageText = `Your Image ${imageCounter}`;
 
     const { generateImage, imageUrl, setImageUrl } = useImageGeneration(400, 500, undefined);
 
@@ -68,34 +68,38 @@ const PostCreation = ({ user, onSubmit }) => {
             <h2>Create a New Post</h2>
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
-                <label>Title:</label>
+                <label htmlFor="Title">Title:</label>
                 <input
                     type="text"
+                    id="Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
                 />
 
-                <label>Description:</label>
+                <label htmlFor="Description">Description:</label>
                 <textarea
+                    id="Description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required
                 />
 
-                <label>Ingredients (comma-separated):</label>
+                <label htmlFor="Ingredients">Ingredients (comma-separated):</label>
                 <textarea
                     type="text"
+                    id="Ingredients"
                     value={ingredients}
                     onChange={(e) => setIngredients(e.target.value)}
                     placeholder="e.g. sausage, egg, potatoes"
                 />
 
-                <label>Burrito Type:</label>
+                <p>Burrito Type:</p>
                 <div className="radio-group">
                     <label>
                         <input
                             type="radio"
+                            id="Homemade"
                             value="homemade"
                             checked={type === "homemade"}
                             onChange={() => setType("homemade")}
@@ -105,6 +109,7 @@ const PostCreation = ({ user, onSubmit }) => {
                     <label>
                         <input
                             type="radio"
+                            id="Purchased"
                             value="purchased"
                             checked={type === "purchased"}
                             onChange={() => setType("purchased")}
@@ -115,26 +120,29 @@ const PostCreation = ({ user, onSubmit }) => {
 
                 {type === "purchased" && (
                     <>
-                        <label>Price ($):</label>
+                        <label htmlFor="Price">Price ($):</label>
                         <input
                             type="number"
+                            id="Price"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                             min="0"
                             required={type === "purchased"}
                         />
 
-                        <label>Location:</label>
+                        <label  htmlFor="Location">Location:</label>
                         <input
                             type="text"
+                            id="Location"
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
                             required={type === "purchased"}
                         />
 
-                        <label>Restaurant Name:</label>
+                        <label htmlFor="Restaurant">Restaurant Name:</label>
                         <input
                             type="text"
+                            id="Restaurant"
                             value={restaurant}
                             onChange={(e) => setRestaurant(e.target.value)}
                             required={type === "purchased"}
@@ -142,9 +150,9 @@ const PostCreation = ({ user, onSubmit }) => {
                     </>
                 )}
 
-                <label>Upload Image:</label>
+                <label htmlFor="Upload">Upload Image:</label>
                 {/* <input type="file" accept="image/*" onChange={handleImageUpload} /> */}
-                <button type="button"
+                <button id="Upload" type="button" 
                     onClick={() => generateImage(placeholderImageText)} // Trigger image generation on button click
                 >
                     Upload File
@@ -152,6 +160,7 @@ const PostCreation = ({ user, onSubmit }) => {
                 <div className="image-preview-holder">
                     {imageUrl && <img src={imageUrl} alt="Preview" className="image-preview" />}
                 </div>
+
                 <button type="submit">Create Post</button>
             </form>
         </div>

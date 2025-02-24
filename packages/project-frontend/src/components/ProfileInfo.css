@@ -87,8 +87,8 @@
     grid-auto-rows: 3rem;
     gap: 0rem 0.75rem;
     color: var(--color-text);
-    position: relative;
-    left: 2rem;
+    /* position: relative;
+    left: 2rem; */
   }
 
   dt {
