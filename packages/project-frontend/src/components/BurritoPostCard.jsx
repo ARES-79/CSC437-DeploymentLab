@@ -16,7 +16,7 @@ const BurritoPostCard = ({ post, currentUserId }) => {
   return (
     <li className="burrito-card">
       {/* User Section */}
-      <Link to={userProfileLink} className="user">
+      <Link to={userProfileLink} className="user" state={{ username: username }}>
         <div>
           {profileImage ? (
             <img src={profileImage} alt={`${username}'s profile`} className="user-icon" />

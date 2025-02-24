@@ -19,7 +19,7 @@ function App() {
 
   const handleDarkModeToggle = (event) => {
     const isChecked = event.target.checked;
-    updateUser({darkMode: isChecked})
+    updateUser({ darkMode: isChecked })
 
     if (isChecked) {
       document.body.classList.add('dark-mode');
@@ -33,21 +33,24 @@ function App() {
       ...prevUser,
       ...updatedFields,  // Merge only the updated fields
     }));
-};
+  };
 
   const POSSIBLE_ROUTES =
     <Routes>
-      <Route path="/" element={<MainLayout/>} >
+      <Route path="/" element={<MainLayout />} >
         <Route path="/" element={
           <PostGallery header="Burrito Discovery Gallery" currentUserId={user.userId}
-             isLoading={isLoading} fetchedPosts={fetchedPosts} />} />
+            isLoading={isLoading} fetchedPosts={fetchedPosts} />} />
         <Route path="/profile" element={
-          <Profile user={user} updateUser={updateUser}  
+          <Profile user={user} updateUser={updateUser}
             isDarkMode={user.darkMode} handleDarkModeToggle={handleDarkModeToggle} />} />
+        <Route path="/profiles/:userId" element={
+          <Profile user={user} />} />
+
       </Route>
     </Routes>
 
-    return POSSIBLE_ROUTES;
+  return POSSIBLE_ROUTES;
 }
 
 export default App

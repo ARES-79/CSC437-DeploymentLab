@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './ProfileInfo.css';
 
 const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -13,6 +14,8 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }) => 
     };
 
     return (
+        <>
+        <h2 className="header">Profile Info</h2>
         <div className="profile-container">
             <img src={user.profilePicture} alt="Profile" className="profile-picture rounded-full" />
 
@@ -64,6 +67,7 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }) => 
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

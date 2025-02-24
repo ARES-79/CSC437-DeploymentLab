@@ -87,7 +87,7 @@ export function usePostFetching(postId, userId, delay=1000) {
             }
             setIsLoading(false);
         }, delay);
-    }, [postId]);
+    }, [postId, userId]);
 
     return { isLoading, fetchedPosts: fetchedPosts };
 }

@@ -1,25 +1,30 @@
-import React, { useState } from "react";
-import "./Profile.css";
 import { usePostFetching } from "../utils/usePostFetching.js";
 import { PostGallery } from './PostGallery';
+import { useParams, useLocation } from 'react-router';
 import ProfileInfo from "../components/ProfileInfo";
 
-const ProfilePage = ({ user, updateUser, isDarkMode, handleDarkModeToggle }) => {
-    const { isLoading, fetchedPosts } = usePostFetching("", user.userId);
+const ProfilePage = ({ user: currentUser, updateUser, isDarkMode, handleDarkModeToggle }) => {
+    const { userId } = useParams();
+    const location = useLocation();
+    const isCurrentUser = userId === undefined;
+    const { isLoading, fetchedPosts } = usePostFetching("", isCurrentUser ? currentUser.userId : userId);
+    const username = location.state?.username || "Unknown User";
 
     return (
         <>
-            <h2 className="header">Profile Info</h2>
-            
-            {/* Extracted profile info component */}
-            <ProfileInfo
-                user={user}
-                updateUser={updateUser}
-                isDarkMode={isDarkMode}
-                handleDarkModeToggle={handleDarkModeToggle}
-            />
+            {/* Only show ProfileInfo if the profile belongs to the logged-in user */}
+            {isCurrentUser && (
+                <ProfileInfo
+                    user={currentUser}
+                    updateUser={updateUser}
+                    isDarkMode={isDarkMode}
+                    handleDarkModeToggle={handleDarkModeToggle}
+                />
+            )}
 
-            <PostGallery header="Your Posts" currentUserId={user.userId} isLoading={isLoading} fetchedPosts={fetchedPosts} />
+            <PostGallery header={isCurrentUser ? "My Posts" : `${username}\'s Posts`}
+                currentUserId={currentUser.userId}
+                isLoading={isLoading} fetchedPosts={fetchedPosts} />
 
         </>
     );
