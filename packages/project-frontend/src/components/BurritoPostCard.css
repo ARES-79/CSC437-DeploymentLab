@@ -72,6 +72,13 @@
   font-size: 0.875rem; /* Same */
   color: var(--color-text);
   margin-top: 0.5rem; /* 8px */
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2; /* Limits to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .burrito-details {

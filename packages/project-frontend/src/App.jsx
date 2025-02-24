@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Profile from './pages/Profile.jsx';
 import { usePostFetching } from "./utils/usePostFetching.js";
@@ -15,18 +15,20 @@ function App() {
     username: 'burritoMaster123',
     profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
     location: 'San Diego, CA',
-    darkMode: false,
+    darkMode: true,
   });
+
+  useEffect(() => {
+    if (user.darkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+  }, [user.darkMode]);
 
   const handleDarkModeToggle = (event) => {
     const isChecked = event.target.checked;
-    updateUser({ darkMode: isChecked })
-
-    if (isChecked) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
+    updateUser({ darkMode: isChecked });
   };
 
   const updateUser = (updatedFields) => {
