@@ -7,10 +7,9 @@ export const CreatePostPage = () => {
     };
 
     return (
-        <div>
-            <h1>New Post</h1>
+        <>
             <PostCreation onSubmit={handlePostSubmit} />
-        </div>
+        </>
     );
 };
 

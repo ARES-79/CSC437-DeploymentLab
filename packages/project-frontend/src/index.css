@@ -35,3 +35,9 @@ button:hover {
     color: var(--color-accent);
     border: 2px solid var(--color-accent);
 }
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--color-text-placeholder);
+    opacity: 1;
+}

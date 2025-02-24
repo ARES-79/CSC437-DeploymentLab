@@ -1,10 +1,11 @@
 .post-creation {
-    max-width: 30rem;
+    max-width: 40rem;
     margin: auto;
     padding: 1rem;
     background: var(--color-component-background);
     border-radius: 0.5rem;
     box-shadow: 0 2px 5px var(--color-shadow);
+    color: var(--color-text);
 }
 
 .post-creation h2 {
@@ -21,19 +22,27 @@
 .post-creation textarea {
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-input-border);
     border-radius: 0.25rem;
 }
 
 .radio-group {
     display: flex;
     gap: 1rem;
+    margin-left: 2rem;
+}
+
+.image-preview-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .image-preview {
-    width: 100%;
-    max-height: 200px;
-    object-fit: cover;
+    max-width: 30rem;
+    height: auto;
+    object-fit: contain;
     margin-top: 0.5rem;
 }
 
