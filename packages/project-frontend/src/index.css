@@ -4,14 +4,34 @@ body {
     background: var(--color-background);
 }
 
-p, label {
+p,
+label {
     color: var(--color-text);
 }
 
-.header { 
-    font-size: 2.5rem; /* Adjust the size */
-    font-weight: 600; /* Bold font weight */
+.header {
+    font-size: 2.5rem;
+    /* Adjust the size */
+    font-weight: 600;
+    /* Bold font weight */
     text-align: center;
-    color: var(--color-text-heading); /* Applying the variable */
+    color: var(--color-text-heading);
+    /* Applying the variable */
     margin-bottom: 1.5rem;
+}
+
+button {
+    background-color: var(--color-accent);
+    color: var(--color-background);
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: var(--color-component-background);
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
 }

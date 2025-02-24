@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState } from 'react'
 import './App.css'
-import { PostGallery } from './pages/PostGallery';
 import Profile from './pages/Profile.jsx';
 import { usePostFetching } from "./utils/usePostFetching.js";
 import { Routes, Route } from "react-router";
 import { MainLayout } from "./pages/MainLayout.jsx";
+import { PostGallery } from './pages/PostGallery';
+import { CreatePostPage } from './pages/CreatPostPage.jsx';
 
 function App() {
   const { isLoading, fetchedPosts } = usePostFetching("", "");
@@ -41,6 +42,8 @@ function App() {
         <Route path="/" element={
           <PostGallery header="Burrito Discovery Gallery" currentUserId={user.userId}
             isLoading={isLoading} fetchedPosts={fetchedPosts} />} />
+        <Route path="/post" element={
+          <CreatePostPage/>} />
         <Route path="/profile" element={
           <Profile user={user} updateUser={updateUser}
             isDarkMode={user.darkMode} handleDarkModeToggle={handleDarkModeToggle} />} />

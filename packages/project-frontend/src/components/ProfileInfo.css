@@ -29,13 +29,7 @@
     /* margin-left: 1rem; */
   }
 
-  button {
-    background-color: var(--color-accent);
-    color: var(--color-component-background);
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
-    border-radius: 0.25rem;
+  .profile-info button {
     width: 10rem;
   }
 
@@ -43,11 +37,6 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-  }
-
-  button:hover {
-    background-color: var(--color-component-background);
-    color: var(--color-accent);
   }
 
   dl,

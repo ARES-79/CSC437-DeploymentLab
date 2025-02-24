@@ -10,7 +10,7 @@ const POSTS = [
         username: "username_1",
         image: sampleBurrito1,
         title: "Delicious Steak Burrito",
-        description: "A tasty steak burrito with fresh ingredients and homemade salsa.",
+        description: "A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa.",
         rating: "4",
         price: "8.99",
         location: "San Diego, CA"
