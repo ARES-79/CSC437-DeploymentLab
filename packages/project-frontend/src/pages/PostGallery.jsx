@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import './PostGallery.css'
 import BurritoPostCard from '../components/BurritoPostCard';
+import { Loading } from '../components/Loading';
 
 export function PostGallery({ header, currentUserId, isLoading, fetchedPosts, expandedContent }) {
 
@@ -18,7 +19,7 @@ export function PostGallery({ header, currentUserId, isLoading, fetchedPosts, ex
     return (
         <>
             <h2 className="header"> {header} </h2>
-            {isLoading && "Loading..."}
+            {isLoading && <Loading/>}
             <ul className="cards">
                 {postElements}
             </ul>

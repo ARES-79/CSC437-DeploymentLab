@@ -16,7 +16,7 @@ function App() {
     username: 'burritoMaster123',
     profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
     location: 'San Diego, CA',
-    darkMode: true,
+    darkMode: false,
   });
 
   useEffect(() => {

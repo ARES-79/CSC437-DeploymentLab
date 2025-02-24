@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./PostCreation.css";
 import { useImageGeneration } from "../utils/useImageGeneration";
+import { Loading } from "./Loading";
 
 const PostCreation = ({ user, onSubmit }) => {
     const [title, setTitle] = useState("");
@@ -15,8 +16,7 @@ const PostCreation = ({ user, onSubmit }) => {
     const [imageCounter, setImageCounter] = useState(0);
     const placeholderImageText = `Your Image ${imageCounter}`;
 
-    const { generateImage, imageUrl, setImageUrl } = useImageGeneration(400, 500, undefined);
-
+    const { generateImage, imageUrl, setImageUrl, isLoading } = useImageGeneration(400, 500, undefined);
     // const handleImageUpload = (e) => {
     //     const file = e.target.files[0];
     //     if (file) {
@@ -157,6 +157,7 @@ const PostCreation = ({ user, onSubmit }) => {
                 >
                     Upload File
                 </button>
+                {isLoading && <Loading/>}
                 <div className="image-preview-holder">
                     {imageUrl && <img src={imageUrl} alt="Preview" className="image-preview" />}
                 </div>

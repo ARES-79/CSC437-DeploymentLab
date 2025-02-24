@@ -3,6 +3,7 @@ import './ProfileInfo.css';
 import { useImageGeneration } from "../utils/useImageGeneration"; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { Loading } from "./Loading";
 
 const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -10,7 +11,7 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }) => 
     const [newLocation, setNewLocation] = useState(user.location);
 
     // For profile image generation
-    const { generateImage, imageUrl, setImageUrl } = useImageGeneration(200, 200, user.profilePicture);
+    const { generateImage, imageUrl, setImageUrl, isLoading } = useImageGeneration(200, 200, user.profilePicture);
 
     const toggleEdit = () => {
         if (isEditing) {
@@ -42,8 +43,11 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }) => 
                 />
                 {isEditing && (
                     <div className="overlay">
+                        {isLoading ? <Loading/> : <div className="overlay-text">
                         <FontAwesomeIcon icon={faPen} />
-                        <p className="overlay-text">Click to change</p>
+                        <p>Click to change</p>
+                        </div>}
+                        
                     </div>
                 )}
             </div>
