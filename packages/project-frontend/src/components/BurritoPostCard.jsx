@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 
 const BurritoPostCard = ({ post, currentUserId, expandedContent }) => {
   
-  const { userId, username, profileImage, image, title, description, type, rating, price, location, restaurant, ingredients } = post
+  const { userId, username, profilePicture, image, title, description, type, rating, price, location, restaurant, ingredients } = post
   const userProfileLink = userId === currentUserId
     ? "/profile"  // If the post's userId is the current user's, link to /profile
     : `/profiles/${userId}`; 
@@ -18,8 +18,8 @@ const BurritoPostCard = ({ post, currentUserId, expandedContent }) => {
       {/* User Section */}
       <Link to={userProfileLink} className="user" state={{ username: username }}>
         <div>
-          {profileImage ? (
-            <img src={profileImage} alt={`${username}'s profile`} className="user-icon" />
+          {profilePicture ? (
+            <img src={profilePicture} alt={`${username}'s profile`} className="user-icon" />
           ) : (
             <FontAwesomeIcon icon={faCircleUser} className="user-icon" />
           )}

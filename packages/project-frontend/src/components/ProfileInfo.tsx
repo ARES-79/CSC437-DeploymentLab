@@ -4,8 +4,9 @@ import { useImageGeneration } from "../utils/useImageGeneration";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { Loading } from "./Loading";
+import { profileInfoProps } from "../types/profileProps";
 
-const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }) => {
+const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }: profileInfoProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const [newUsername, setNewUsername] = useState(user.username);
     const [newLocation, setNewLocation] = useState(user.location);
@@ -20,10 +21,10 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }) => 
         setIsEditing(!isEditing);
     };
 
-    console.log("profilePicture", user.profilePicture);
-    console.log("imageUrl", imageUrl);
+    // console.log("profilePicture", user.profilePicture);
+    // console.log("imageUrl", imageUrl);
 
-    const handleProfileImageClick = () => {
+    const handleProfilePictureClick = () => {
         if (isEditing) {
             // Generate a new image only when in editing mode
             generateImage(user.username);
@@ -39,7 +40,7 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }) => 
                     src={imageUrl || user.profilePicture} 
                     alt="Profile" 
                     className="profile-picture rounded-full" 
-                    onClick={handleProfileImageClick} // Click to change profile picture only in editing mode
+                    onClick={handleProfilePictureClick} // Click to change profile picture only in editing mode
                 />
                 {isEditing && (
                     <div className="overlay">

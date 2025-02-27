@@ -1,20 +1,25 @@
-import { Link } from 'react-router';
 import './PostGallery.css'
 import BurritoPostCard from '../components/BurritoPostCard';
 import { Loading } from '../components/Loading';
+import { Post } from '../types/post';
 
-export function PostGallery({ header, currentUserId, isLoading, fetchedPosts, expandedContent }) {
+interface PostGalleryProps {
+    header?: string;
+    currentUserId: string;
+    isLoading: boolean;
+    fetchedPosts: Post[];
+    expandedContent: boolean;
+}
+
+export function PostGallery({ header, currentUserId, isLoading, fetchedPosts, expandedContent }: PostGalleryProps) {
 
     const postElements = fetchedPosts.map((post) => (
-        /* need to change when I add routing */
-        // <Link key={post.id} to={`/posts/${post.id}`}> 
             <BurritoPostCard 
                 key={post.id}
                 post={post}
                 currentUserId={currentUserId}
                 expandedContent={expandedContent}
             />
-        // </Link>
     ));
     return (
         <>

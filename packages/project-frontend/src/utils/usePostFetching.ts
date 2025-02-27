@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import sampleBurrito1 from '../assets/exBurritoImages/burrito1.jpeg';
 import sampleBurrito2 from '../assets/exBurritoImages/burrito2.jpeg';
 import sampleBurrito3 from '../assets/exBurritoImages/burrito3.jpeg';
+import { Post } from "../types/post";
 
-const POSTS = [
+const POSTS: Post[] = [
     {
         id: "0",
         userId: "0",
@@ -21,7 +22,7 @@ const POSTS = [
         id: "1",
         userId: "1",
         username: "username_2",
-        profileImage: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
+        profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
         image: sampleBurrito2,
         title: "Delicious Steak Burrito",
         description: "A tasty steak burrito with fresh ingredients and homemade salsa.",
@@ -34,7 +35,7 @@ const POSTS = [
     {
         id: "2",
         userId: "1",
-        profileImage: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
+        profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
         username: "username_2",
         image: sampleBurrito3,
         title: "Delicious Steak Burrito",
@@ -82,9 +83,9 @@ const POSTS = [
  * @param delay {number} the number of milliseconds fetching will take
  * @returns {{isLoading: boolean, fetchedPosts}} fetch state and data
  */
-export function usePostFetching(postId, userId, delay=1000) {
+export function usePostFetching(postId: string, userId: string, delay = 1000) {
     const [isLoading, setIsLoading] = useState(true);
-    const [fetchedPosts, setFetchedPosts] = useState([]);
+    const [fetchedPosts, setFetchedPosts] = useState<Post[]>([]);
     useEffect(() => {
         setTimeout(() => {
             if (postId === "" && userId === "") {
@@ -98,5 +99,5 @@ export function usePostFetching(postId, userId, delay=1000) {
         }, delay);
     }, [postId, userId]);
 
-    return { isLoading, fetchedPosts: fetchedPosts };
+    return { isLoading, fetchedPosts };
 }

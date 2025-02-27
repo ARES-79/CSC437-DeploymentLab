@@ -15,7 +15,7 @@ export function useImageGeneration(width = 300, height = 200, initialImageUrl = 
     const [isLoading, setIsLoading] = useState(false);
 
     // Function to generate the image when triggered
-    const generateImage = (placeholderText) => {
+    const generateImage = (placeholderText: string) => {
         setIsLoading(true);
         // setImageUrl(null); // Optionally clear the image while loading
 
