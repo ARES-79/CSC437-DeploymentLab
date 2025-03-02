@@ -5,17 +5,20 @@ import Profile from './pages/Profile.tsx';
 import { usePostFetching } from "./utils/usePostFetching.js";
 import { Routes, Route } from "react-router";
 import { MainLayout } from "./pages/MainLayout.jsx";
-import { PostGallery } from './pages/PostGallery.jsx';
-import { CreatePostPage } from './pages/CreatPostPage.jsx';
-import { PostDetails } from './pages/PostDetails.jsx';
+import { PostGallery } from './pages/PostGallery.js';
+import { CreatePostPage } from './pages/CreatPostPage.js';
+import { PostDetails } from './pages/PostDetails.js';
 
 
-// type UpdateUserData = {
-//   username?: string;
-//   profilePicture?: string;
-//   location?: string;
-//   darkMode?: boolean;
-// }
+/* 
+I am currently having an issue with converting files with components realted to Routes
+to TypeScript (after importing the react router types)
+- <Routes>, <Route>, <Link>, and <Outlet> are all affected by this issue 
+
+Oddly enough, I had no problem converting main.jsx to Typescript even though it has the related
+<BrowserRouter> component. 
+
+*/
 
 function App() {
   const { isLoading, fetchedPosts } = usePostFetching("", "");
