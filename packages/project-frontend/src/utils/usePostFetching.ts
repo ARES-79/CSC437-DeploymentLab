@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import sampleBurrito1 from '../assets/exBurritoImages/burrito1.jpeg';
 import sampleBurrito2 from '../assets/exBurritoImages/burrito2.jpeg';
 import sampleBurrito3 from '../assets/exBurritoImages/burrito3.jpeg';
-import { Post } from "../types/post";
+import { PostFromAPI } from "../types/post";
 
-const POSTS: Post[] = [
+const POSTS: PostFromAPI[] = [
     {
-        id: "0",
-        userId: "0",
-        username: "username_1",
+        _id: "0",
+        createdBy: {
+            _id: "0",
+            username: "username_1"
+        },
         image: sampleBurrito1,
         title: "Delicious Steak Burrito",
         description: "A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.",
@@ -19,10 +21,12 @@ const POSTS: Post[] = [
         restaurant: "Restaurant ABC"
     },
     {
-        id: "1",
-        userId: "1",
-        username: "username_2",
-        profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
+        _id: "1",
+        createdBy: {
+            _id: "1",
+            username: "username_2",
+            profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg'
+        },
         image: sampleBurrito2,
         title: "Delicious Steak Burrito",
         description: "A tasty steak burrito with fresh ingredients and homemade salsa.",
@@ -33,10 +37,12 @@ const POSTS: Post[] = [
         restaurant: "Restaurant 123"
     },
     {
-        id: "2",
-        userId: "1",
-        profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
-        username: "username_2",
+        _id: "2",
+        createdBy: {
+            _id: "1",
+            username: "username_2",
+            profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg'
+        },
         image: sampleBurrito3,
         title: "Delicious Steak Burrito",
         ingredients: ["tomato", "lettuce", "cheese", "beef"],
@@ -45,9 +51,11 @@ const POSTS: Post[] = [
         rating: "4"
     },
     {
-        id: "3",
-        userId: "0",
-        username: "username_1",
+        _id: "3",
+        createdBy: {
+            _id: "0",
+            username: "username_1"
+        },
         image: sampleBurrito1,
         title: "Delicious Steak Burrito",
         description: "A tasty steak burrito with fresh ingredients and homemade salsa.",
@@ -59,9 +67,11 @@ const POSTS: Post[] = [
         restaurant: "Restaurant 123"
     },
     {
-        id: "4",
-        userId: "0",
-        username: "username_1",
+        _id: "4",
+        createdBy: {
+            _id: "0",
+            username: "username_1"
+        },
         image: sampleBurrito1,
         title: "Delicious Steak Burrito",
         description: "A tasty steak burrito with fresh ingredients and homemade salsa.",
@@ -85,15 +95,15 @@ const POSTS: Post[] = [
  */
 export function usePostFetching(postId: string, userId: string, delay = 1000) {
     const [isLoading, setIsLoading] = useState(true);
-    const [fetchedPosts, setFetchedPosts] = useState<Post[]>([]);
+    const [fetchedPosts, setFetchedPosts] = useState<PostFromAPI[]>([]);
     useEffect(() => {
         setTimeout(() => {
             if (postId === "" && userId === "") {
                 setFetchedPosts(POSTS);
             } else if (postId !== "") {
-                setFetchedPosts(POSTS.filter((post) => post.id === postId));
+                setFetchedPosts(POSTS.filter((post) => post._id === postId));
             } else {
-                setFetchedPosts(POSTS.filter((post) => post.userId === userId));
+                setFetchedPosts(POSTS.filter((post) => post.createdBy._id === userId));
             }
             setIsLoading(false);
         }, delay);

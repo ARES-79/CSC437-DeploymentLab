@@ -1,8 +1,12 @@
-
-export interface Post {
-    id: string;
-    userId: string;
+export interface PostCreatedBy {
+    _id: string;
     username: string;
+    profilePicture?: string;
+}
+
+export interface PostFromAPI {
+    _id: string;
+    createdBy: PostCreatedBy ; //will be a userId
     image: string;
     title: string;
     description: string;
@@ -11,13 +15,25 @@ export interface Post {
     price?: string;
     location?: string;
     restaurant?: string;
-    profilePicture?: string;
+    ingredients?: string[];
+}
+
+export interface PostDocument {
+    _id: string;
+    createdBy: string ; //will be a userId
+    image: string;
+    title: string;
+    description: string;
+    type: "purchased" | "homemade";
+    rating: string;
+    price?: string;
+    location?: string;
+    restaurant?: string;
     ingredients?: string[];
 }
 
 export interface NewPostSubmission {
-    userId: string;
-    username: string;
+    createdBy: string ; //will be a userId
     image: string;
     title: string;
     description: string;
@@ -26,6 +42,5 @@ export interface NewPostSubmission {
     price?: string;
     location?: string;
     restaurant?: string;
-    profilePicture?: string;
     ingredients?: string[];
 }

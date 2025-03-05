@@ -48,13 +48,10 @@ const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPost
 
         const newPost: NewPostSubmission = {
             //post id will have to be generated
-            userId: user.userId,
-            username: user.username,
-            profilePicture: user.profilePicture,
+            createdBy: user._id,
             title,
             description,
             image: imageUrl,
-            //TODO: add a rating input to the new post form
             rating: rating.toString(),
             ingredients: ingredients.split(",").map(ingr => ingr.trim()), // Convert comma-separated ingredients to array
             type,

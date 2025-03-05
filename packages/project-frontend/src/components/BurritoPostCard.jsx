@@ -6,9 +6,11 @@ import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import "./BurritoPostCard.css";
 import { Link } from 'react-router';
 
+//post should be PostFromAPI
 const BurritoPostCard = ({ post, currentUserId, expandedContent }) => {
   
-  const { userId, username, profilePicture, image, title, description, type, rating, price, location, restaurant, ingredients } = post
+  const { createdBy, image, title, description, type, rating, price, location, restaurant, ingredients } = post;
+  const { _id: userId, username, profilePicture} = createdBy;
   const userProfileLink = userId === currentUserId
     ? "/profile"  // If the post's userId is the current user's, link to /profile
     : `/profiles/${userId}`; 

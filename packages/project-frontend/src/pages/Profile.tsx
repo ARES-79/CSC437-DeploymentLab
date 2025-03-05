@@ -9,7 +9,7 @@ const ProfilePage = ({ user: currentUser, updateUser, isDarkMode, handleDarkMode
     const { userId } = useParams();
     const location = useLocation();
     const isCurrentUser = userId === undefined;
-    const { isLoading, fetchedPosts } = usePostFetching("", isCurrentUser ? currentUser.userId : userId);
+    const { isLoading, fetchedPosts } = usePostFetching("", isCurrentUser ? currentUser._id : userId);
     const username = location.state?.username || "Unknown User";
 
     return (
@@ -26,7 +26,7 @@ const ProfilePage = ({ user: currentUser, updateUser, isDarkMode, handleDarkMode
             )}
 
             <PostGallery header={isCurrentUser ? "My Posts" : `${username}\'s Posts`}
-                currentUserId={currentUser.userId}
+                currentUserId={currentUser._id}
                 isLoading={isLoading} fetchedPosts={fetchedPosts}
                 expandedContent={false} />
 

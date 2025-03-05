@@ -1,13 +1,13 @@
 import './PostGallery.css'
 import BurritoPostCard from '../components/BurritoPostCard';
 import { Loading } from '../components/Loading';
-import { Post } from '../types/post';
+import { PostFromAPI } from '../types/post';
 
 interface PostGalleryProps {
     header?: string;
     currentUserId: string;
     isLoading: boolean;
-    fetchedPosts: Post[];
+    fetchedPosts: PostFromAPI[];
     expandedContent: boolean;
 }
 
@@ -15,7 +15,7 @@ export function PostGallery({ header, currentUserId, isLoading, fetchedPosts, ex
 
     const postElements = fetchedPosts.map((post) => (
             <BurritoPostCard 
-                key={post.id}
+                key={post._id}
                 post={post}
                 currentUserId={currentUserId}
                 expandedContent={expandedContent}

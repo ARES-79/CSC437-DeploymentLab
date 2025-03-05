@@ -1,5 +1,5 @@
 export interface User {
-    userId: string;
+    _id: string;
     username: string;
     profilePicture?: string;
     location: string;

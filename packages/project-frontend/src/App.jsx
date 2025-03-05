@@ -23,9 +23,9 @@ Oddly enough, I had no problem converting main.jsx to Typescript even though it 
 function App() {
   const { isLoading, fetchedPosts } = usePostFetching("", "");
   const [user, setUser] = useState({ //<User>
-    userId: '1',
+    _id: '1',
     username: 'burritoMaster123',
-    profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
+    // profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
     location: 'San Diego, CA',
     darkMode: false,
   });
@@ -54,7 +54,7 @@ function App() {
     <Routes>
       <Route path="/" element={<MainLayout />} >
         <Route path="/" element={
-          <PostGallery header="Burrito Discovery Gallery" currentUserId={user.userId}
+          <PostGallery header="Burrito Discovery Gallery" currentUserId={user._id}
             isLoading={isLoading} fetchedPosts={fetchedPosts} expandedContent={false} />} />
         <Route path="/post" element={
           <CreatePostPage user={user}/>} />
@@ -64,7 +64,7 @@ function App() {
         <Route path="/profiles/:userId" element={
           <Profile user={user} />} />
         <Route path="/posts/:postId" element={
-          <PostDetails currentUserId={user.userId} />} />
+          <PostDetails currentUserId={user._id} />} />
       </Route>
     </Routes>
 
