@@ -1,0 +1,13 @@
+.image-preview-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.image-preview {
+    max-width: 30rem;
+    height: auto;
+    object-fit: contain;
+    margin-top: 0.5rem;
+}

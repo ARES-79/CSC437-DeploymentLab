@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import './ProfileInfo.css';
 import { useImageGeneration } from "../utils/useImageGeneration";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,9 +11,8 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }: pro
     const [isEditing, setIsEditing] = useState(false);
     const [newUsername, setNewUsername] = useState(user.username);
     const [newLocation, setNewLocation] = useState(user.location);
-
-    // For profile image generation
-    const { generateImage, imageUrl, setImageUrl, isLoading } = useImageGeneration(200, 200, user.profilePicture);
+    const [imageUrl, setImageUrl] = useState(user.profilePicture);
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
 
     const toggleEdit = () => {
         if (isEditing) {
@@ -22,13 +21,19 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }: pro
         setIsEditing(!isEditing);
     };
 
-    // console.log("profilePicture", user.profilePicture);
-    // console.log("imageUrl", imageUrl);
-
     const handleProfilePictureClick = () => {
         if (isEditing) {
-            // Generate a new image only when in editing mode
-            generateImage(user.username);
+            fileInputRef.current?.click(); // Open file explorer only in editing mode
+        }
+    };
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+        const files = event.target.files; // Fix type error
+        if (files && files.length > 0) {
+            const url = URL.createObjectURL(files[0]);
+            setImageUrl(url);
+            updateUser({ ...user, profilePicture: url }); // Update user profile picture
         }
     };
 
@@ -52,19 +57,19 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }: pro
                                 role="button" />
                         )
                     }
-                    {/* <img 
-                    src={imageUrl || user.profilePicture} 
-                    alt="Profile" 
-                    className="profile-picture rounded-full" 
-                    onClick={handleProfilePictureClick} // Click to change profile picture only in editing mode
-                /> */}
                     {isEditing && (
                         <div className="overlay">
-                            {isLoading ? <Loading /> : <div className="overlay-text">
+                            <div className="overlay-text">
                                 <FontAwesomeIcon icon={faPen} />
                                 <p>Click to change</p>
-                            </div>}
-
+                            </div>
+                            <input
+                                ref={fileInputRef} // Hidden file input
+                                type="file"
+                                accept="image/*"
+                                style={{ display: "none" }}
+                                onChange={handleFileChange} // Handle file selection
+                            />
                         </div>
                     )}
                 </div>

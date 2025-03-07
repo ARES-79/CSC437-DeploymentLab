@@ -4,6 +4,7 @@ import { useImageGeneration } from "../utils/useImageGeneration";
 import { Loading } from "./Loading";
 import { NewPostSubmission } from "../types/post";
 import { User } from "../types/user";
+import { ImageUploader } from "./ImageUploader";
 
 
 const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPostSubmission) => void }) => {
@@ -16,16 +17,7 @@ const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPost
     const [location, setLocation] = useState(user?.location || '');
     const [restaurant, setRestaurant] = useState("");
     const [error, setError] = useState("");
-    const [imageCounter, setImageCounter] = useState(0);
-    const placeholderImageText = `Your Image ${imageCounter}`;
-
-    const { generateImage, imageUrl, setImageUrl, isLoading } = useImageGeneration(400, 500, undefined);
-    // const handleImageUpload = (e) => {
-    //     const file = e.target.files[0];
-    //     if (file) {
-    //         setImage(URL.createObjectURL(file)); // Preview Image
-    //     }
-    // };
+    const [imageUrl, setImageUrl] = useState<string>('');
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -41,6 +33,11 @@ const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPost
 
         if (rating === "" || rating < 0 || rating > 5) {
             setError("Please provide a rating between 0 and 5.");
+            return;
+        }
+
+        if (!imageUrl) {
+            setError("Please upload an image before submitting.");
             return;
         }
 
@@ -62,13 +59,12 @@ const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPost
         setTitle("");
         setDescription("");
         setRating(""); 
-        setImageUrl(""); // This will reset the image to undefined
-        setImageCounter(imageCounter + 1);
         setIngredients("");
         setPrice("");
         setLocation("");
         setRestaurant("");
         setType("homemade");
+        setImageUrl("");
     };
 
     return (
@@ -173,9 +169,9 @@ const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPost
                     </>
                 )}
 
-                <label htmlFor="Upload">Upload Image:</label>
-                {/* <input type="file" accept="image/*" onChange={handleImageUpload} /> */}
-                <button id="Upload" type="button"
+                <p>Upload Image:</p>
+                <ImageUploader imageUrl={imageUrl} setImageUrl={setImageUrl} />
+                {/* <button id="Upload" type="button"
                     onClick={() => generateImage(placeholderImageText)} // Trigger image generation on button click
                 >
                     Upload File
@@ -183,7 +179,7 @@ const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPost
                 {isLoading && <Loading />}
                 <div className="image-preview-holder">
                     {imageUrl && <img src={imageUrl} alt="Preview" className="image-preview" />}
-                </div>
+                </div> */}
 
                 <button type="submit">Create Post</button>
             </form>
