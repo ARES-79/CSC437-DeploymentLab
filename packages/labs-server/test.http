@@ -1,0 +1,46 @@
+### Original Example
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "newuser", "password": "password" }
+
+### Username Already Exitsts example
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "newuser", "password": "password" }
+
+### Missing Data in Request Body example
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "user": "almost"}
+
+### Valid Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "newuser", "password": "password" }
+
+### Invalid Password Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "newuser", "password": "nonvalid" }
+
+### Invalid Username Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "nonexistentuser", "password": "password" }
+
+### A second example, each request should be delimited by a triple hash
+GET http://localhost:3000/api/images
+
+### Testing Invalid Auth Token
+GET http://localhost:3000/api/images
+Authorization: Bearer invalid token string
+
+### Testing Valid Auth Token
+GET http://localhost:3000/api/images
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld3VzZXIiLCJpYXQiOjE3NDE2MjQzNTgsImV4cCI6MTc0MTcxMDc1OH0.6PcsYh_ZwComdL5dBzDucM40tsl0lN7GiWGxaaHrkJE

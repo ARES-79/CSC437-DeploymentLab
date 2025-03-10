@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 import { registerImageRoutes } from "./routes/images.js";
+import { registerAuthRoutes, verifyAuthToken } from "./routes/auth.js";
 
 
 async function setUpServer() {
@@ -30,12 +31,14 @@ async function setUpServer() {
   const app = express();
   app.use(express.static(staticDir));
   app.use(express.json());
+  app.use("/api/*", verifyAuthToken);
 
   app.get("/hello", (req: Request, res: Response) => {
     res.send("Hello, World");
   });
 
   registerImageRoutes(app, mongoClient);
+  registerAuthRoutes(app, mongoClient);
 
   app.get("*", (req: Request, res: Response) => {
     console.log("none of the routes above me were matched");
