@@ -70,7 +70,9 @@ export function registerAuthRoutes(app: express.Application, mongoClient: MongoC
                         message: "Username already taken"
                     });
                 } else {
-                    res.status(201).send();
+                    generateAuthToken(username).then(
+                        token => { res.status(201).send({ token: token }); }
+                    )
                 }
             })
             .catch(error => {
