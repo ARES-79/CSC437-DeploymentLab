@@ -23,13 +23,15 @@ export function ImageUploader({ imageUrl, setImageUrl }: ImageUploaderProps) {
 
     return (
         <>
-            <button id="Upload" type="button" onClick={handleButtonClick}>
+            <button id="Upload" type="button" onClick={handleButtonClick} aria-label="Upload an image">
                 Upload File
             </button>
 
             <div className="image-preview-holder">
-                <input type="file" accept="image/*" ref={fileInputRef} onChange={handleFileChange} className="hidden" />
-                {imageUrl && <img src={imageUrl} alt="Preview" className="image-preview" />}
+                <label htmlFor="fileInput" className="sr-only" >Choose an image file to upload and preview it.</label>
+                <input id="fileInput" type="file" accept="image/*" ref={fileInputRef} 
+                    onChange={handleFileChange} className="hidden" />
+                {imageUrl && <img src={imageUrl} alt="Preview of Uploaded Image" className="image-preview" />}
             </div>
         </>
     );

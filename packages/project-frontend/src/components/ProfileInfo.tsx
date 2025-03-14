@@ -63,8 +63,10 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }: pro
                                 <FontAwesomeIcon icon={faPen} />
                                 <p>Click to change</p>
                             </div>
+                            <label htmlFor="profileImageUpload" className="sr-only" >Choose an image file as your profile picture and preview it.</label>
                             <input
                                 ref={fileInputRef} // Hidden file input
+                                id="profileImageUpload"
                                 type="file"
                                 accept="image/*"
                                 style={{ display: "none" }}
