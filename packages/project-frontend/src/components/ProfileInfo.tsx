@@ -27,15 +27,44 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }: pro
         }
     };
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
-        const files = event.target.files; // Fix type error
-        if (files && files.length > 0) {
-            const url = URL.createObjectURL(files[0]);
-            setImageUrl(url);
-            updateUser({ ...user, profilePicture: url }); // Update user profile picture
+    //     const files = event.target.files; // Fix type error
+    //     if (files && files.length > 0) {
+    //         const url = URL.createObjectURL(files[0]);
+    //         setImageUrl(url);
+    //         updateUser({ ...user, profilePicture: url }); // Update user profile picture
+    //     }
+    // };
+
+    function readAsDataURL(file: File): Promise<string> {
+        return new Promise((resolve, reject) => {
+            const fr = new FileReader();
+            fr.onload = () => {
+                // TypeScript will infer the correct type for `result` here.
+                resolve(fr.result as string); // Ensures it's a string
+            };
+            fr.onerror = (err) => reject(err);
+            fr.readAsDataURL(file);
+        });
+    }
+
+    function handleFileChange(e: React.ChangeEvent<HTMLInputElement>): void {
+        const inputElement = e.target;
+        if (inputElement.files && inputElement.files[0]) {
+            const fileObj = inputElement.files[0];
+
+            // Pass the file object to `readAsDataURL` and set the image URL
+            readAsDataURL(fileObj).then((newImgSrc) => {
+                setImageUrl(newImgSrc);  // Assuming `setImageUrl` is a state setter
+                updateUser({ ...user, profilePicture: newImgSrc });
+            }).catch((err) => {
+                console.error('Error reading file:', err);
+            });
+        } else {
+            console.error('No file selected');
         }
-    };
+    }
 
     return (
         <>

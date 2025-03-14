@@ -1,0 +1,16 @@
+[
+    {
+        "_id": "0",
+        "username": "username_1",
+        "location": "San Luis Obispo, CA",
+        "darkMode": false
+    },
+    {
+        "_id": "1",
+        "username": "burritoMaster123",
+        "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg",
+        "location": "San Diego, CA",
+        "darkMode": true
+    }
+
+]

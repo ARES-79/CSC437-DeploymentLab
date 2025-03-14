@@ -3,11 +3,11 @@ import { Outlet } from "react-router"
 
 export function MainLayout(props) {
     return (
-        <div>
+        <>
             <Header />
-            <div style={{padding: "2em 1em"}}>
+            <main style={{padding: "2em 1em"}}>
                 <Outlet />
-            </div>
-        </div>
+            </main>
+        </>
     );
 }
