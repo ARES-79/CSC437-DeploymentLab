@@ -1,6 +1,6 @@
 import { MongoClient, WithId, UpdateResult } from "mongodb";
 
-interface ImageData {
+export interface ImageData {
     _id: string;
     src: string;
     name: string;
@@ -17,12 +17,18 @@ interface UserData {
 export class ImageProvider {
     constructor(private readonly mongoClient: MongoClient) { }
 
-    async getAllImages(userId?: string): Promise<(Omit<ImageData, "author"> & { author: Omit<WithId<UserData>, "_id"> | null })[]> {
+    async getAllImages(userId?: string, imageId?: string): Promise<(Omit<ImageData, "author"> & { author: Omit<WithId<UserData>, "_id"> | null })[]> {
         const db = this.mongoClient.db();
         const imagesCollection = db.collection<ImageData>(process.env.IMAGES_COLLECTION_NAME || "images");
         const usersCollection = db.collection<UserData>(process.env.USERS_COLLECTION_NAME || "users");
 
-        const filter = userId ? { author: userId } : {};
+        let filter;
+        if (!imageId){
+            filter = userId ? { author: userId } : {};
+        } else {
+            filter = {_id: imageId};
+        }
+        
         const images = await imagesCollection.find(filter).toArray();
 
         // Fetch user details for each image
@@ -49,4 +55,19 @@ export class ImageProvider {
 
         return result.matchedCount;
     }
+
+    async createImage(imageDoc: ImageData): Promise<boolean> {
+        const db = this.mongoClient.db();
+        try {
+            await db.collection<ImageData>(process.env.IMAGES_COLLECTION_NAME || "images")
+                .insertOne(imageDoc);
+    
+            return true;
+        } catch (error) {
+            console.error("Error adding image to the database:", error);
+            return false;
+        }
+    }
+
+
 };

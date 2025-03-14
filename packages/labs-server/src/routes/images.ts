@@ -1,19 +1,22 @@
 import express, { Request, Response } from "express";
 import { MongoClient } from "mongodb";
 import { ImageProvider } from "../ImageProvider";
+import { ImageData } from "../ImageProvider";
+import { handleImageFileErrors, imageMiddlewareFactory } from "../imageUploadMiddleware";
 
 export function registerImageRoutes(app: express.Application, mongoClient: MongoClient) {
-    app.get("/api/images", (req: Request, res: Response) => {
+    app.get("/api/images/:imageId?", (req: Request, res: Response) => {
+
+        const { imageId } = req.params;
         const imageProvider = new ImageProvider(mongoClient); // Create ImageProvider instance
 
-        console.log("new Code!")
         let userId: string | undefined = undefined;
         if (typeof req.query.createdBy === "string") {
             userId = req.query.createdBy;
         }
-        console.log(userId);
 
-        imageProvider.getAllImages(userId)
+
+        imageProvider.getAllImages(userId, imageId)
             .then(images => {
                 res.json(images); // Send images as JSON response
             })
@@ -22,6 +25,40 @@ export function registerImageRoutes(app: express.Application, mongoClient: Mongo
                 res.status(500).json({ error: "Internal Server Error" }); // Handle errors
             });
     });
+
+    app.post(
+        "/api/images",
+        imageMiddlewareFactory.single("image"),
+        handleImageFileErrors,
+        async (req: Request, res: Response) => {
+
+            if (!req.file || !req.body.name) {
+                res.status(400).json({
+                    error: "Bad request",
+                    message: "Missing required field: image file or name",
+                });
+                return;
+            }
+
+            const imageDoc: ImageData = {
+                _id: req.file.filename,
+                src: `/uploads/${req.file.filename}`,
+                name: req.body.name,
+                likes: 0,
+                author: res.locals.token.username
+            }
+            const imageProvider = new ImageProvider(mongoClient); 
+            const result = await imageProvider.createImage(imageDoc);
+
+            if(result){
+                res.status(201).send(imageDoc);
+                return;
+            } else{
+                 // Final handler function after the above two middleware functions finish running
+                res.status(500).send("Error uploading the the image.");
+            }
+        }
+    )
 
     app.patch('/api/images/:id', async (req: Request, res: Response) => {
         const { id } = req.params; // Extract the 'id' parameter from the URL

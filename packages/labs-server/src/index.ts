@@ -9,6 +9,7 @@ async function setUpServer() {
   dotenv.config(); // Read the .env file in the current working directory, and load values into process.env.
   const PORT = process.env.PORT || 3000;
   const staticDir = process.env.STATIC_DIR || "public";
+  const imageDir = process.env.IMAGE_UPLOAD_DIR || "uploads";
   const options = {
     root: staticDir,
     headers: {
@@ -30,6 +31,7 @@ async function setUpServer() {
 
   const app = express();
   app.use(express.static(staticDir));
+  app.use("/uploads", express.static(imageDir));
   app.use(express.json());
   app.use("/api/*", verifyAuthToken);
 
