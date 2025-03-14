@@ -28,7 +28,13 @@
 
 .radio-group {
     display: flex;
-    gap: 1rem;
+}
+
+.radio-group > legend{
+    margin-bottom: 1rem;
+}
+
+.radio-group > label {
     margin-left: 2rem;
 }
 

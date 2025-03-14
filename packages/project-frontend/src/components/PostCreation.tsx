@@ -11,7 +11,7 @@ const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPost
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [ingredients, setIngredients] = useState("");
-    const [rating, setRating] = useState<number | "">(""); 
+    const [rating, setRating] = useState<number | "">("");
     const [type, setType] = useState<"purchased" | "homemade">("homemade"); // "homemade" or "purchased"
     const [price, setPrice] = useState("");
     const [location, setLocation] = useState(user?.location || '');
@@ -58,7 +58,7 @@ const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPost
         onSubmit(newPost); // Call function to handle post submission
         setTitle("");
         setDescription("");
-        setRating(""); 
+        setRating("");
         setIngredients("");
         setPrice("");
         setLocation("");
@@ -113,28 +113,31 @@ const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPost
                     placeholder="e.g. sausage, egg, potatoes"
                 />
 
-                <p>Burrito Type:</p>
-                <div className="radio-group">
-                    <label>
-                        <input
-                            type="radio"
-                            id="Homemade"
-                            value="homemade"
-                            checked={type === "homemade"}
-                            onChange={() => setType("homemade")}
-                        />
-                        Homemade
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            id="Purchased"
-                            value="purchased"
-                            checked={type === "purchased"}
-                            onChange={() => setType("purchased")}
-                        />
-                        Purchased
-                    </label>
+                {/* <p>Burrito Type:</p> */}
+                <div >
+                    <fieldset className="radio-group">
+                        <legend>Burrito Type:</legend>
+                        <label>
+                            <input
+                                type="radio"
+                                id="Homemade"
+                                value="homemade"
+                                checked={type === "homemade"}
+                                onChange={() => setType("homemade")}
+                            />
+                            Homemade
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                id="Purchased"
+                                value="purchased"
+                                checked={type === "purchased"}
+                                onChange={() => setType("purchased")}
+                            />
+                            Purchased
+                        </label>
+                    </fieldset>
                 </div>
 
                 {type === "purchased" && (
@@ -166,20 +169,13 @@ const PostCreation = ({ user, onSubmit }: { user: User, onSubmit: (post: NewPost
                             onChange={(e) => setRestaurant(e.target.value)}
                             required={type === "purchased"}
                         />
+
+                        <button>Submit</button>
                     </>
                 )}
 
                 <p>Upload Image:</p>
                 <ImageUploader imageUrl={imageUrl} setImageUrl={setImageUrl} />
-                {/* <button id="Upload" type="button"
-                    onClick={() => generateImage(placeholderImageText)} // Trigger image generation on button click
-                >
-                    Upload File
-                </button>
-                {isLoading && <Loading />}
-                <div className="image-preview-holder">
-                    {imageUrl && <img src={imageUrl} alt="Preview" className="image-preview" />}
-                </div> */}
 
                 <button type="submit">Create Post</button>
             </form>
