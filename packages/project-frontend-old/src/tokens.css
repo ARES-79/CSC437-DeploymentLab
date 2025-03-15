@@ -1,0 +1,29 @@
+:root {
+    --color-background: #FAFAFA;
+    --color-component-background: #EDEDED;
+    --color-accent:#4F46E6;  
+    --color-text-heading: var(--color-accent);
+    --color-text: #2B2B2B;
+    --color-text-placeholder: #757575;
+    --color-input-border: #CCC;
+    --color-nav-divider: #9ca3af;
+    --font-logo: "Neonderthaw", serif;
+    --font-text-body: "Montserrat", sans-serif;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    --color-default-star: #ccc;
+    --color-filled-star: var(--color-accent);
+    
+}
+
+body.dark-mode {
+    /* --color-background: #15383B; */
+    --color-background: #112E30;
+    --color-component-background: #303030;
+    --color-text: #FAFAFA;
+    --color-text-placeholder: #cccccc;
+    --color-nav-divider: #FAFAFA;
+    --color-accent: #54E3EB;
+    --color-text-heading: var(--color-accent);
+    --color-shadow: rgba(255, 255, 255, 0.1);
+    --color-filled-star: var(--color-accent);
+}

@@ -1,0 +1,45 @@
+.post-creation {
+    max-width: 40rem;
+    margin: auto;
+    padding: 1rem;
+    background: var(--color-component-background);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px var(--color-shadow);
+    color: var(--color-text);
+}
+
+.post-creation h2 {
+    text-align: center;
+}
+
+.post-creation form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.post-creation input,
+.post-creation textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--color-input-border);
+    border-radius: 0.25rem;
+}
+
+.radio-group {
+    display: flex;
+}
+
+.radio-group > legend{
+    margin-bottom: 1rem;
+}
+
+.radio-group > label {
+    margin-left: 2rem;
+}
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+    text-align: center;
+}

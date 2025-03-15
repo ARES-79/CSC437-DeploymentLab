@@ -1,14 +1,13 @@
-import React, { useRef, useId, useState } from "react";
+import React, { useRef, useState } from "react";
+
 
 interface ImageUploaderProps {
     imageUrl: string;
     setImageUrl: (url: string) => void;
-    setImageFile: (file: File) => void;
 }
 
-export function ImageUploader({ imageUrl, setImageUrl, setImageFile }: ImageUploaderProps) {
+export function ImageUploader({ imageUrl, setImageUrl }: ImageUploaderProps) {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const inputId = useId();
 
     const handleButtonClick = () => {
         fileInputRef.current?.click(); // Open file explorer
@@ -38,13 +37,9 @@ export function ImageUploader({ imageUrl, setImageUrl, setImageFile }: ImageUplo
         const inputElement = e.target;
         if (inputElement.files && inputElement.files[0]) {
             const fileObj = inputElement.files[0];
-            // console.log("image sile on selection:", fileObj);
-
-            setImageFile(fileObj);
             
             // Pass the file object to `readAsDataURL` and set the image URL
             readAsDataURL(fileObj).then((newImgSrc) => {
-                // console.log("New Image Src:", newImgSrc);
                 setImageUrl(newImgSrc);  // Assuming `setImageUrl` is a state setter
             }).catch((err) => {
                 console.error('Error reading file:', err);
@@ -61,8 +56,8 @@ export function ImageUploader({ imageUrl, setImageUrl, setImageFile }: ImageUplo
             </button>
 
             <div className="image-preview-holder">
-                <label htmlFor={inputId} className="sr-only" >Choose an image file to upload and preview it.</label>
-                <input id={inputId} type="file" accept="image/*" ref={fileInputRef}
+                <label htmlFor="fileInput" className="sr-only" >Choose an image file to upload and preview it.</label>
+                <input id="fileInput" type="file" accept="image/*" ref={fileInputRef}
                     onChange={handleFileChange} className="hidden" />
                 {imageUrl && <img src={imageUrl} alt="Preview of Uploaded Image" className="image-preview" />}
             </div>

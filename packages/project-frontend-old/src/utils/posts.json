@@ -1,0 +1,73 @@
+[
+    {
+        "_id": "0",
+        "createdBy": "0",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/33/Blue_merle_koolie_short_coat_heading_sheep.jpg",
+        "title": "Delicious Steak Burrito",
+        "description": "A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa. A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.A tasty steak burrito with fresh ingredients and homemade salsa.",
+        "type": "purchased",
+        "rating": "4",
+        "price": "8.99",
+        "location": "San Diego, CA",
+        "restaurant": "Restaurant ABC"
+    },
+    {
+        "_id": "1",
+        "createdBy": "1",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Huskiesatrest.jpg/2560px-Huskiesatrest.jpg",
+        "title": "Delicious Steak Burrito",
+        "description": "A tasty steak burrito with fresh ingredients and homemade salsa.",
+        "type": "purchased",
+        "rating": "3",
+        "price": "10.99",
+        "location": "San Diego, CA",
+        "restaurant": "Restaurant 123"
+    },
+    {
+        "_id": "2",
+        "createdBy": "1",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg",
+        "title": "Delicious Steak Burrito",
+        "ingredients": [
+            "tomato",
+            "lettuce",
+            "cheese",
+            "beef"
+        ],
+        "type": "homemade",
+        "description": "A tasty steak burrito with fresh ingredients and homemade salsa.",
+        "rating": "4"
+    },
+    {
+        "_id": "3",
+        "createdBy": "0",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/33/Blue_merle_koolie_short_coat_heading_sheep.jpg",
+        "title": "Delicious Steak Burrito",
+        "description": "A tasty steak burrito with fresh ingredients and homemade salsa.",
+        "type": "purchased",
+        "ingredients": [
+            "avocado",
+            "sour cream",
+            "chicken",
+            "beans"
+        ],
+        "rating": "2",
+        "price": "8.99",
+        "location": "San Diego, CA",
+        "restaurant": "Restaurant 123"
+    },
+    {
+        "_id": "4",
+        "createdBy": "0",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/33/Blue_merle_koolie_short_coat_heading_sheep.jpg",
+        "title": "Delicious Steak Burrito",
+        "description": "A tasty steak burrito with fresh ingredients and homemade salsa.",
+        "rating": "5",
+        "type": "homemade",
+        "ingredients": [
+            "guacamole",
+            "jalapenos",
+            "onions"
+        ]
+    }
+]

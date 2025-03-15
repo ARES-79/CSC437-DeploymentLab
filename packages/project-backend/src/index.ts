@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
-import { registerPostRoutes } from "./routes/posts.js";
+import { registerPostRoutes } from "./routes/postRoutes.js";
 import { registerAuthRoutes, verifyAuthToken } from "./routes/auth.js";
 
 

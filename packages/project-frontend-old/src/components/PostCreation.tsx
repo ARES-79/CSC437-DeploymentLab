@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useActionState } from "react";
+// import { useActionState } from "react";
 import "./PostCreation.css";
 import { NewPostSubmission } from "../types/post";
 import { User } from "../types/user";
-import { Loading } from "./Loading";
 import { ImageUploader } from "./ImageUploader";
 
 
@@ -18,88 +17,76 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
     // const [restaurant, setRestaurant] = useState("");
 
     const [error, setError] = useState("");
-    const [imageSrc, setImageSrc] = useState<string | null>(null);
-    const [imageFile, setImageFile] = useState<File | null>(null);
-    const [type, setType] = useState<"purchased" | "homemade">("homemade"); // "homemade" or "purchased"
+    const [imageSrc, setImageSrc] = useState<string>('');
+    const [burritoType, setBurritoType] = useState<"homemade" | "purchased">("homemade");
 
-    const [result, submitAction, isPending] = useActionState(
-        async (state: { type: string; message: string; } | null, formData: FormData) => {
-            const title = (formData.get("title") as string)?.trim() || "";
-            const description = (formData.get("description") as string)?.trim() || "";
-            const rating = formData.get("rating");
-            const ingredients = formData.get("ingredients");
-            const price = formData.get("price");
-            const location = formData.get("location");
-            const restaurant = formData.get("restaurant");
-            // const image = formData.get("Image");
+    // const [result, submitAction, isPending] = useActionState(
+    //     async (state: { type: string; message: string; } | null, formData: FormData) => {
+    //         const title = (formData.get("Title") as string)?.trim() || "";
+    //         const description = (formData.get("Description") as string)?.trim() || "";
+    //         const rating = formData.get("Rating");
+    //         const ingredients = formData.get("Ingredients");
+    //         const type = formData.get("Type");
+    //         const price = formData.get("Price");
+    //         const location = formData.get("Location");
+    //         const restaurant = formData.get("Restaurant");
+    //         const image = formData.get("Image");
 
-            console.log("please log");
+    //         if (!title || !description) {
+    //             return {
+    //                 type: "error",
+    //                 message: "Title and description are required.",
+    //             };
+    //         }
 
-            if (!title || !description) {
-                return {
-                    type: "error",
-                    message: "Title and description are required.",
-                };
-            }
+    //         if (type === "purchased" && (!price || !location || !restaurant)) {
+    //             return {
+    //                 type: "error",
+    //                 message: "Price, location, and restaurant are required for purchased burritos.",
+    //             };
+    //         }
 
-            if (type === "purchased" && (!price || !location || !restaurant)) {
-                return {
-                    type: "error",
-                    message: "Price, location, and restaurant are required for purchased burritos.",
-                };
-            }
+    //         if (!(image as File)?.name) {
+    //             return {
+    //                 type: "error",
+    //                 message: "Please upload an image before submitting.",
+    //             };
+    //         }
 
-            console.log(imageFile);
-            if (!imageFile?.name) {
-                return {
-                    type: "error",
-                    message: "Please upload an image before submitting.",
-                };
-            }
+    //         try {
+    //             const response = await fetch("/api/images", {
+    //                 method: "POST",
+    //                 body: formData,
+    //                 headers: {
+    //                     'Authorization': `Bearer ${authToken}`
+    //                 }
+    //             });
+    //             if (!response.ok) {
+    //                 return {
+    //                     type: "error",
+    //                     message: "`${response.status}: Error submitting the image.`",
+    //                 };
+    //             }
+    //         } catch (error) { // Network error
+    //             console.error(error);
+    //             // Return an error message...
+    //         }
+    //         setImageSrc('');
+    //         // const newPost = {
+    //         //     createdBy: user._id,
+    //         //     title,
+    //         //     description,
+    //         //     image: imageUrl,
+    //         //     rating,
+    //         //     ingredients: ingredients ? ingredients.split(",").map((i: string) => i.trim()) : [],
+    //         //     type,
+    //         //     ...(type === "purchased" && { price, location, restaurant }),
+    //         // };
 
-            formData.append("type", type);
-            formData.append("image", imageFile);
-            formData.append("createdBy", user._id);
+    //         // onSubmit(newPost);
 
-            console.log("image file in form data", formData.get("image"));
-
-            try {
-                console.log("attempting fetch");
-                const response = await fetch("/api/posts", {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
-                if (!response.ok) {
-                    
-                    return {
-                        type: "error",
-                        message: `${response.status}: Error submitting the image.`,
-                    };
-                }
-            } catch (error) { // Network error
-                console.error(error);
-                // Return an error message...
-            }
-            setImageSrc(null);
-            setImageFile(null);
-            // const newPost = {
-            //     createdBy: user._id,
-            //     title,
-            //     description,
-            //     image: imageUrl,
-            //     rating,
-            //     ingredients: ingredients ? ingredients.split(",").map((i: string) => i.trim()) : [],
-            //     type,
-            //     ...(type === "purchased" && { price, location, restaurant }),
-            // };
-
-            // onSubmit(newPost);
-
-            return { type: "success", message: "Post created successfully!" };
-        }, null);
+    //         return { type: "success", message: "Post created successfully!" };
+    //     }, null);
 
     // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     //     e.preventDefault();
@@ -153,10 +140,9 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
     return (
         <div className="post-creation">
             <h2>Create a New Post</h2>
-            {result && <p className="error">{result.message}</p>}
-            {isPending && <Loading/>}
-            {/* {error && <p className="error">{error}</p>} */}
-            <form action={submitAction}>
+            {error && <p className="error">{error}</p>}
+            {/* action={submitAction} */}
+            <form >
                 <label htmlFor="Title">Title:</label>
                 <input
                     type="text"
@@ -168,7 +154,7 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
                 <label htmlFor="Description">Description:</label>
                 <textarea
                     id="Description"
-                    name="description"
+                    name="Description"
                     required
                 />
 
@@ -176,7 +162,7 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
                 <input
                     type="number"
                     id="Rating"
-                    name="rating"
+                    name="Rating"
                     min="0"
                     max="5"
                     required
@@ -185,7 +171,7 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
                 <label htmlFor="Ingredients">Ingredients (comma-separated):</label>
                 <textarea
                     id="Ingredients"
-                    name="ingredients"
+                    name="Ingredients"
                     placeholder="e.g. sausage, egg, potatoes"
                 />
 
@@ -197,10 +183,9 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
                             <input
                                 type="radio"
                                 id="Homemade"
-                                name="homemade"
+                                name="Homemade"
                                 value="homemade"
-                                checked={type === "homemade"}
-                                onChange={() => setType("homemade")}
+                                defaultChecked
                             />
                             Homemade
                         </label>
@@ -208,41 +193,39 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
                             <input
                                 type="radio"
                                 id="Purchased"
-                                name="purchased"
+                                name="Purchased"
                                 value="purchased"
-                                checked={type === "purchased"}
-                                onChange={() => setType("purchased")}
                             />
                             Purchased
                         </label>
                     </fieldset>
                 </div>
 
-                {type === "purchased" && (
+                {burritoType === "purchased" && (
                     <>
                         <label htmlFor="Price">Price ($):</label>
                         <input
                             type="number"
                             id="Price"
-                            name="price"
+                            name="Price"
                             min="0"
-                            required={type === "purchased"}
+                            required={burritoType === "purchased"}
                         />
 
                         <label htmlFor="Location">Location:</label>
                         <input
                             type="text"
                             id="Location"
-                            name="location"
-                            required={type === "purchased"}
+                            name="Location"
+                            required={burritoType === "purchased"}
                         />
 
                         <label htmlFor="Restaurant">Restaurant Name:</label>
                         <input
                             type="text"
                             id="Restaurant"
-                            name="restaurant"
-                            required={type === "purchased"}
+                            name="Restaurant"
+                            required={burritoType === "purchased"}
                         />
 
                         <button>Submit</button>
@@ -250,7 +233,7 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
                 )}
 
                 <p>Upload Image:</p>
-                <ImageUploader imageUrl={imageSrc || ''} setImageUrl={setImageSrc} setImageFile={setImageFile} />
+                <ImageUploader imageUrl={imageSrc} setImageUrl={setImageSrc} />
 
                 <button type="submit">Create Post</button>
             </form>
