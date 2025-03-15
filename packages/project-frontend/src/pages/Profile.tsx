@@ -9,7 +9,7 @@ const ProfilePage = ({ user: currentUser, updateUser, isDarkMode, handleDarkMode
     const { userId } = useParams();
     const location = useLocation();
     const isCurrentUser = userId === undefined;
-    const { isLoading, fetchedPosts } = usePostFetching("", isCurrentUser ? currentUser._id : userId);
+    const { isLoading, fetchedPosts } = usePostFetching("", isCurrentUser ? currentUser._id : userId, "");
     const username = location.state?.username || "Unknown User";
 
     return (

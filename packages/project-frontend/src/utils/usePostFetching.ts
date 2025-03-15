@@ -93,21 +93,42 @@ const POSTS: PostFromAPI[] = [
  * @param delay {number} the number of milliseconds fetching will take
  * @returns {{isLoading: boolean, fetchedPosts}} fetch state and data
  */
-export function usePostFetching(postId: string, userId: string, delay = 1000) {
+export function usePostFetching(postId: string, userId: string, authToken: string, delay = 1000) {
     const [isLoading, setIsLoading] = useState(true);
     const [fetchedPosts, setFetchedPosts] = useState<PostFromAPI[]>([]);
     useEffect(() => {
-        setTimeout(() => {
-            if (postId === "" && userId === "") {
-                setFetchedPosts(POSTS);
-            } else if (postId !== "") {
-                setFetchedPosts(POSTS.filter((post) => post._id === postId));
-            } else {
-                setFetchedPosts(POSTS.filter((post) => post.createdBy._id === userId));
+        const fetchPosts = async () => {
+            try {
+                let url = "/api/posts"; // Default URL
+
+                if (postId) {
+                    url = `/api/posts/${postId}`;
+                } else if (userId) {
+                    url = `/api/posts?createdBy=${encodeURIComponent(userId)}`;
+                }
+                const response = await fetch(url, {
+                    method: 'GET', // Optional, since GET is default
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`, // Replace with your actual token
+                        'Content-Type': 'application/json' // Optional, depending on the API requirements
+                    }
+                });
+                if (!response.ok) {
+                    console.error(`HTTP error! Status: ${response.status}`);
+                    return;
+                }
+                const data = await response.json(); // Parse JSON data
+                setFetchedPosts(data); // Update state with fetched data
+            } catch (error) {
+                console.error(`Could not get images: ${error}`);
+                throw error;
+            } finally {
+                setIsLoading(false); // Set loading to false after fetching is complete
             }
-            setIsLoading(false);
-        }, delay);
-    }, [postId, userId]);
+        };
+        // console.log("fetching posts from api");
+        fetchPosts();
+    }, [postId, userId, authToken]);
 
     return { isLoading, fetchedPosts };
 }

@@ -29,7 +29,7 @@ const BurritoPostCard = ({ post, currentUserId, expandedContent }) => {
         <span className="username">{username}</span>
       </Link>
 
-      <Link to={`/posts/${post.id}`}>     
+      <Link to={`/posts/${post._id}`}>     
       <img src={image} alt={title} className="burrito-image" />
 
       <h2 className="burrito-title">{title}</h2>

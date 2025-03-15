@@ -8,7 +8,7 @@ interface PostDetailsProps {
 
 export function PostDetails ({currentUserId} : PostDetailsProps) {
     const { postId } = useParams<{ postId: string }>();
-    const { isLoading, fetchedPosts } = usePostFetching(postId || "", "");
+    const { isLoading, fetchedPosts } = usePostFetching(postId || "", "", "");
 
     return (
         <>
