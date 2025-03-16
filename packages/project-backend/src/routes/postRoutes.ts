@@ -53,7 +53,7 @@ export function registerPostRoutes(app: express.Application, mongoClient: MongoC
                 price: req.body.price,
                 location: req.body.location,
                 restaurant: req.body.restaurant,
-                ingredients: req.body.ingredients
+                ingredients: req.body.ingredients ? req.body.ingredients.split(",").map((i: string) => i.trim()) : []
             }
             const postProvider = new PostProvider(mongoClient); 
             const result = await postProvider.createPost(postDoc);

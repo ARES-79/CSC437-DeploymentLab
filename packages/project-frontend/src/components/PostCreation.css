@@ -39,7 +39,13 @@
 }
 
 .error {
-    color: red;
+    color: var(--color-text-error);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.success {
+    color: var(--color-accent);
     font-size: 0.9rem;
     text-align: center;
 }

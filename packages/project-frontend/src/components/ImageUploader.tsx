@@ -62,7 +62,7 @@ export function ImageUploader({ imageUrl, setImageUrl, setImageFile }: ImageUplo
 
             <div className="image-preview-holder">
                 <label htmlFor={inputId} className="sr-only" >Choose an image file to upload and preview it.</label>
-                <input id={inputId} type="file" accept="image/*" ref={fileInputRef}
+                <input id={inputId} type="file" accept=".png,.jpg,.jpeg" ref={fileInputRef}
                     onChange={handleFileChange} className="hidden" />
                 {imageUrl && <img src={imageUrl} alt="Preview of Uploaded Image" className="image-preview" />}
             </div>

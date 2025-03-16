@@ -17,7 +17,7 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
     // const [location, setLocation] = useState(user?.location || '');
     // const [restaurant, setRestaurant] = useState("");
 
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [type, setType] = useState<"purchased" | "homemade">("homemade"); // "homemade" or "purchased"
@@ -27,18 +27,17 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
             const title = (formData.get("title") as string)?.trim() || "";
             const description = (formData.get("description") as string)?.trim() || "";
             const rating = formData.get("rating");
-            const ingredients = formData.get("ingredients");
+            const ingredients = (formData.get("ingredients") as string)?.split(",").map(ingr => ingr.trim());
             const price = formData.get("price");
             const location = formData.get("location");
             const restaurant = formData.get("restaurant");
-            // const image = formData.get("Image");
 
             console.log("please log");
 
-            if (!title || !description) {
+            if (!title || !description || !rating) {
                 return {
                     type: "error",
-                    message: "Title and description are required.",
+                    message: "Title, description, and rating are required.",
                 };
             }
 
@@ -73,7 +72,7 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
                     }
                 });
                 if (!response.ok) {
-                    
+
                     return {
                         type: "error",
                         message: `${response.status}: Error submitting the image.`,
@@ -153,9 +152,6 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
     return (
         <div className="post-creation">
             <h2>Create a New Post</h2>
-            {result && <p className="error">{result.message}</p>}
-            {isPending && <Loading/>}
-            {/* {error && <p className="error">{error}</p>} */}
             <form action={submitAction}>
                 <label htmlFor="Title">Title:</label>
                 <input
@@ -253,6 +249,9 @@ const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (po
                 <ImageUploader imageUrl={imageSrc || ''} setImageUrl={setImageSrc} setImageFile={setImageFile} />
 
                 <button type="submit">Create Post</button>
+                {result && <p className={`${result.type}`}>{result.message}</p>}
+                {isPending && <Loading />}
+                {/* {error && <p className="error">{error}</p>} */}
             </form>
         </div>
     );

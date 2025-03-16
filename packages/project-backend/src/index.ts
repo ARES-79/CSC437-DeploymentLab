@@ -19,9 +19,6 @@ async function setUpServer() {
   }
 
   //apis needed:
-    // POSTS
-    // POST /api/posts
-    
     // USERS
     // GET /api/users/:id
     // PATCH /api/users/:id
