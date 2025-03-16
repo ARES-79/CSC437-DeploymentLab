@@ -63,7 +63,7 @@ export function registerPostRoutes(app: express.Application, mongoClient: MongoC
                 return;
             } else{
                  // Final handler function after the above two middleware functions finish running
-                res.status(500).send("Error uploading the the image.");
+                res.status(500).send("Error uploading the image.");
             }
         }
     )

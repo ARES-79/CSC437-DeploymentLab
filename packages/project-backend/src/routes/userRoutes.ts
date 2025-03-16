@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { MongoClient } from "mongodb";
 import { UserProvider } from "../UserProvider";
 import { handleImageFileErrors, imageMiddlewareFactory } from "../imageUploadMiddleware";
+import { UpdateUserData } from "../types/user";
 
 //apis needed:
 // USERS
@@ -29,45 +30,35 @@ export function registerUserRoutes(app: express.Application, mongoClient: MongoC
             });
     });
 
-    // app.patch(
-    //     "/api/users/:userId",
-    //     imageMiddlewareFactory.single("image"),
-    //     handleImageFileErrors,
-    //     async (req: Request, res: Response) => {
-    //         console.log("file:", req.file);
-    //         console.log("username:", req.body.username);
-    //         console.log("description:", req.body.description);
-    //         if (!req.file || !req.body.title || !req.body.description) {
-    //             res.status(400).json({
-    //                 error: "Bad request",
-    //                 message: "Missing required field.",
-    //             });
-    //             return;
-    //         }
+    app.patch(
+        "/api/users/:userId",
+        imageMiddlewareFactory.single("image"),
+        handleImageFileErrors,
+        async (req: Request, res: Response) => {
 
-    //         const postDoc: PostDocument = {
-    //             _id: req.file.filename,
-    //             createdBy: req.body.createdBy,
-    //             image: `/uploads/${req.file.filename}`,
-    //             title: req.body.title,
-    //             description: req.body.description,
-    //             type: req.body.type,
-    //             rating: req.body.rating,
-    //             price: req.body.price,
-    //             location: req.body.location,
-    //             restaurant: req.body.restaurant,
-    //             ingredients: req.body.ingredients ? req.body.ingredients.split(",").map((i: string) => i.trim()) : []
-    //         }
-    //         const postProvider = new PostProvider(mongoClient);
-    //         const result = await postProvider.createPost(postDoc);
+            const { userId } = req.params;
+            console.log("file:", req.file);
+            console.log("username:", req.body.username);
+            console.log("location:", req.body.location);
+            console.log("darkmode:", req.body.darkmode);
 
-    //         if (result) {
-    //             res.status(201).send(postDoc);
-    //             return;
-    //         } else {
-    //             // Final handler function after the above two middleware functions finish running
-    //             res.status(500).send("Error uploading the the image.");
-    //         }
-    //     }
-    // )
+            const userDoc: UpdateUserData = {
+                ...(req.body.username && { username: req.body.username }),
+                ...(req.file?.filename && { profilePicture: `/uploads/${req.file.filename}` }),
+                ...(req.body.location && { location: req.body.location }),
+                ...(req.body.darkmode !== undefined && { darkMode: req.body.darkmode })
+            }
+
+            const userProvider = new UserProvider(mongoClient);
+            const result = await userProvider.updateUser(userId, userDoc);
+
+            if (result) {
+                res.status(200).send(userDoc);
+                return;
+            } else {
+                // Final handler function after the above two middleware functions finish running
+                res.status(500).send("Error uploading user profile.");
+            }
+        }
+    );
 }
