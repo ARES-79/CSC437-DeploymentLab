@@ -53,7 +53,7 @@ export function registerAuthRoutes(app: express.Application, mongoClient: MongoC
 
     app.post("/auth/register", (req: Request, res: Response) => {
         console.log("register request received");
-        const { username, password } = req.body;
+        const { username, password, location } = req.body;
 
         if (!username || !password) {
             res.status(400).send({
@@ -63,7 +63,15 @@ export function registerAuthRoutes(app: express.Application, mongoClient: MongoC
             return;
         }
 
-        credentialsProvider.registerUser(username, password)
+        if (!location) {
+            res.status(400).send({
+                error: "Bad request",
+                message: "Missing location"
+            });
+            return;
+        }
+
+        credentialsProvider.registerUser(username, password, location)
             .then(result => {
                 if (!result) {
                     res.status(400).send({

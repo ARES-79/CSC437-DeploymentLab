@@ -10,7 +10,7 @@ export const CreatePostPage = ({user}: {user: User}) => {
 
     return (
         <>
-            <PostCreation user={user} onSubmit={handlePostSubmit} />
+            <PostCreation user={user}/>
         </>
     );
 };

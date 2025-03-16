@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 import { registerPostRoutes } from "./routes/postRoutes.js";
 import { registerAuthRoutes, verifyAuthToken } from "./routes/auth.js";
+import { registerUserRoutes } from "./routes/userRoutes.js";
 
 
 async function setUpServer() {
@@ -18,12 +19,6 @@ async function setUpServer() {
     }
   }
 
-  //apis needed:
-    // USERS
-    // GET /api/users/:id
-    // PATCH /api/users/:id
-    // POST /api/users -- for creating new users
-
   const { MONGO_USER, MONGO_PWD, MONGO_CLUSTER, DB_NAME } = process.env;
 
   const connectionStringRedacted = `mongodb+srv://${MONGO_USER}:<password>@${MONGO_CLUSTER}/${DB_NAME}`;
@@ -35,7 +30,7 @@ async function setUpServer() {
   const collectionInfos = await mongoClient.db().listCollections().toArray();
 
   const app = express();
-  // app.use(express.static(staticDir));
+  app.use(express.static(staticDir));
   app.use("/uploads", express.static(imageDir));
   app.use(express.json());
   // app.use("/api/*", verifyAuthToken);
@@ -45,7 +40,8 @@ async function setUpServer() {
   });
 
   registerPostRoutes(app, mongoClient);
-  // registerAuthRoutes(app, mongoClient);
+  registerAuthRoutes(app, mongoClient);
+  registerUserRoutes(app, mongoClient);
 
   // app.get("*", (req: Request, res: Response) => {
   //   console.log("none of the routes above me were matched");

@@ -23,7 +23,7 @@ Oddly enough, I had no problem converting main.jsx to Typescript even though it 
 function App() {
   const { isLoading, fetchedPosts } = usePostFetching("", "");
   const [user, setUser] = useState({ //<User>
-    _id: '1',
+    _id: '67d74fd97c57ea3505e096df',
     username: 'burritoMaster123',
     // profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
     location: 'San Diego, CA',

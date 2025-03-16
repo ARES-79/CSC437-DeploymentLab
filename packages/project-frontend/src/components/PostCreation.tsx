@@ -7,7 +7,7 @@ import { Loading } from "./Loading";
 import { ImageUploader } from "./ImageUploader";
 
 
-const PostCreation = ({ user, onSubmit, authToken }: { user: User, onSubmit: (post: NewPostSubmission) => void, authToken?: String }) => {
+const PostCreation = ({ user, authToken }: { user: User, authToken?: String }) => {
     // const [title, setTitle] = useState("");
     // const [description, setDescription] = useState("");
     // const [ingredients, setIngredients] = useState("");

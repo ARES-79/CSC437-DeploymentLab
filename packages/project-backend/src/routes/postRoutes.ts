@@ -21,7 +21,7 @@ export function registerPostRoutes(app: express.Application, mongoClient: MongoC
                 res.json(images); // Send images as JSON response
             })
             .catch(error => {
-                console.error("Error fetching images:", error);
+                console.error("Error fetching posts:", error);
                 res.status(500).json({ error: "Internal Server Error" }); // Handle errors
             });
     });
