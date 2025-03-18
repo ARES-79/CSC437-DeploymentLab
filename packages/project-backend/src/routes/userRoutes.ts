@@ -16,13 +16,11 @@ export function registerUserRoutes(app: express.Application, mongoClient: MongoC
         const username = res.locals.token.username; //from decoded auth token
         const userProvider = new UserProvider(mongoClient);
 
-        console.log("token at user info request time:", username);
-
         userProvider.getUser(username)
             .then(
                 user => {
                     if (!user) {
-                        console.log("Issue getting user.");
+                        // console.log("Issue getting user.");
                         res.status(400).json({
                             error: "Bad request",
                             message: `User with username ${username} does not exist.`
@@ -45,10 +43,6 @@ export function registerUserRoutes(app: express.Application, mongoClient: MongoC
         async (req: Request, res: Response) => {
 
             const { userId } = req.params;
-            console.log("file:", req.file);
-            console.log("username:", req.body.username);
-            console.log("location:", req.body.location);
-            console.log("darkmode:", req.body.darkmode);
 
             const userDoc: UpdateUserData = {
                 ...(req.body.username && { username: req.body.username }),

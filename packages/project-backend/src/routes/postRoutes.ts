@@ -31,12 +31,7 @@ export function registerPostRoutes(app: express.Application, mongoClient: MongoC
         imageMiddlewareFactory.single("image"),
         handleImageFileErrors,
         async (req: Request, res: Response) => {
-            console.log("file:", req.file);
-            console.log("title:", req.body.title);
-            console.log("description:", req.body.description);
-            console.log("type:", req.body.type);
-            console.log("ingredients:", req.body.ingredients);
-            console.log("ingredients ? :", req.body.ingredients ? true : false);
+       
             if (!req.file || !req.body.title || !req.body.description || !req.body.type) {
                 res.status(400).json({
                     error: "Bad request",
