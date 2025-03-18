@@ -54,18 +54,20 @@ export function registerUserRoutes(app: express.Application, mongoClient: MongoC
                 ...(req.body.username && { username: req.body.username }),
                 ...(req.file?.filename && { profilePicture: `/uploads/${req.file.filename}` }),
                 ...(req.body.location && { location: req.body.location }),
-                ...(req.body.darkmode !== undefined && { darkMode: req.body.darkmode })
+                ...(req.body.darkmode !== undefined && { darkMode: req.body.darkmode === 'true' })
             }
 
             const userProvider = new UserProvider(mongoClient);
             const result = await userProvider.updateUser(userId, userDoc);
 
-            if (result) {
+            if (result == 1) {
                 res.status(200).send(userDoc);
                 return;
+            } else if (result == -1){
+                res.status(400).send({message: "Username is already taken."});
             } else {
-                // Final handler function after the above two middleware functions finish running
-                res.status(500).send("Error uploading user profile.");
+                // only other option should be result = 0
+                res.status(400).send({message: "User with given id does not exist."});
             }
         }
     );

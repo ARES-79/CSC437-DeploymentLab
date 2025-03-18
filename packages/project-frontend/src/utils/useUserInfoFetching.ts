@@ -12,8 +12,6 @@ export function useUserInfoFetching(authToken: string) {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-
-                console.log("token in useUserInfoFetching:", authToken);
                 const response = await fetch("/api/user", {
                     method: 'GET', // Optional, since GET is default
                     headers: {

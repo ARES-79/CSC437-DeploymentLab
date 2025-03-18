@@ -43,14 +43,15 @@
   }
 
   .overlay-text {
-    display:flex;
+    display: flex;
     column-gap: 0.5rem;
     font-size: 1rem;
     color: white;
     align-items: center;
   }
 
-  .overlay svg, .overlay p {
+  .overlay svg,
+  .overlay p {
     color: white;
   }
 
@@ -60,8 +61,8 @@
     max-width: 25rem;
   }
 
-  .username-input,
-  .location-input {
+  .username-input.enabled,
+  .location-input.enabled {
     border: 1px solid var(--color-input-border);
     border-radius: 0.5rem;
     padding: 0.5rem;
@@ -94,4 +95,10 @@
 
   dt {
     font-weight: 500;
+  }
+
+  .profileError {
+    color: var(--color-text-error-alternative);
+    text-align: center;
+    margin-top: 1rem;
   }

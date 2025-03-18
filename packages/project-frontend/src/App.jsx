@@ -12,6 +12,7 @@ import { RegisterPage } from './pages/auth/RegisterPage.tsx';
 import { LoginPage } from './pages/auth/LoginPage.jsx';
 import { useUserInfoFetching } from './utils/useUserInfoFetching.ts';
 import { ProtectedRoute } from './ProtectedRoute.tsx';
+import { submitUpdatedInfo } from "./utils/sendUpdateUserInfoRequest.ts"
 
 
 /* 
@@ -41,6 +42,7 @@ function App() {
   const handleDarkModeToggle = (event) => {
     const isChecked = event.target.checked;
     updateUser({ darkMode: isChecked });
+    submitUpdatedInfo( fetchedUser._id, authToken, { darkMode: isChecked });
   };
 
   const updateUser = (updatedFields) => { //: UpdateUserData

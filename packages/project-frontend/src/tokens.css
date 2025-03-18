@@ -5,6 +5,7 @@
     --color-text-heading: var(--color-accent);
     --color-text: #2B2B2B;
     --color-text-error: #B00020;
+    --color-text-error-alternative: var(--color-text-error);
     --color-text-placeholder: #757575;
     --color-input-border: #CCC;
     --color-nav-divider: #9ca3af;
@@ -17,11 +18,11 @@
 }
 
 body.dark-mode {
-    /* --color-background: #15383B; */
     --color-background: #112E30;
     --color-component-background: #303030;
     --color-text: #FAFAFA;
     --color-text-error: red;
+    --color-text-error-alternative: #FF5733;
     --color-text-placeholder: #cccccc;
     --color-nav-divider: #FAFAFA;
     --color-accent: #54E3EB;

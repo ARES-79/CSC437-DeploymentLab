@@ -22,6 +22,7 @@ const ProfilePage = ({ user: currentUser, updateUser, isDarkMode, handleDarkMode
                     updateUser={updateUser}
                     isDarkMode={isDarkMode}
                     handleDarkModeToggle={handleDarkModeToggle}
+                    authToken={authToken}
                 />
             )}
 

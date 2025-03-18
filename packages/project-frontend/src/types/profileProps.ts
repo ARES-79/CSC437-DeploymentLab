@@ -5,6 +5,7 @@ export interface profileInfoProps{
     updateUser: (user: UpdateUserData) => void;
     isDarkMode: boolean;
     handleDarkModeToggle: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    authToken: string;
 }
 
 export interface profilePageProps{

@@ -1,5 +1,13 @@
 import { MongoClient, UpdateResult, ObjectId } from "mongodb";
 import { User, UpdateUserData } from "./types/user";
+import { ICredentialsDocumentForCreation } from "CredentialsProvider";
+
+interface IFullCredentialsDocument{
+    _id: string | ObjectId;
+    username: string;
+    password: string;
+}
+
 export class UserProvider {
     constructor(private readonly mongoClient: MongoClient) { }
 
@@ -39,6 +47,13 @@ export class UserProvider {
         const result: UpdateResult = await db
             .collection<User>(process.env.USERS_COLLECTION_NAME || "users")
             .updateOne(filter, { $set: { ...payload } });
+
+        if (payload.username) {
+            // Update the corresponding credentials document
+            const result_2: UpdateResult = await db
+            .collection<IFullCredentialsDocument>(process.env.CREDS_COLLECTION_NAME || "userCreds")
+            .updateOne(filter, { $set: { username: payload.username } });
+        }
 
         return result.matchedCount;
     }

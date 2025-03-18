@@ -1,7 +1,7 @@
 import { Collection, MongoClient } from "mongodb";
 import bcrypt from "bcryptjs";
 
-interface ICredentialsDocument {
+export interface ICredentialsDocumentForCreation {
     username: string;
     password: string;
 }
@@ -14,7 +14,7 @@ interface IRegisterUserDocument {
 }
 
 export class CredentialsProvider {
-    private readonly creds_collection: Collection<ICredentialsDocument>;
+    private readonly creds_collection: Collection<ICredentialsDocumentForCreation>;
     private readonly users_collection: Collection<IRegisterUserDocument>;
 
     constructor(mongoClient: MongoClient) {
@@ -26,27 +26,31 @@ export class CredentialsProvider {
         if (!USERS_COLLECTION_NAME) {
             throw new Error("Missing USERS_COLLECTION_NAME from env file");
         }
-        this.creds_collection = mongoClient.db().collection<ICredentialsDocument>(COLLECTION_NAME);
-        this.users_collection= mongoClient.db().collection<IRegisterUserDocument>(USERS_COLLECTION_NAME);
+        this.creds_collection = mongoClient.db().collection<ICredentialsDocumentForCreation>(COLLECTION_NAME);
+        this.users_collection = mongoClient.db().collection<IRegisterUserDocument>(USERS_COLLECTION_NAME);
     }
 
     async registerUser(username: string, plaintextPassword: string, location: string) {
         const filter = { username: username };
         const existingUser = await this.creds_collection.findOne(filter);
 
-        if (existingUser){ return false;}
+        if (existingUser) { return false; }
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(plaintextPassword, salt);
 
-        console.log("salt:", salt);
-        console.log("hash:", hashedPassword);
+        //create a shared id to connect the user data and user credentials
+        const { ObjectId } = require('mongodb'); 
+        const newId = new ObjectId();
+
         this.creds_collection.insertOne({
+            _id: newId,
             username: username,
             password: hashedPassword
         });
 
         this.users_collection.insertOne({
+            _id: newId,
             username: username,
             location: location,
             darkMode: false
@@ -60,7 +64,7 @@ export class CredentialsProvider {
         const filter = { username: username };
         const user = await this.creds_collection.findOne(filter);
 
-        if (!user){ return false;}
+        if (!user) { return false; }
 
         const hashedDatabasePassword = user.password;
         const verified = await bcrypt.compare(plaintextPassword, hashedDatabasePassword)
