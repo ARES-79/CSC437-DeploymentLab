@@ -25,7 +25,6 @@ export function useUserInfoFetching(authToken: string) {
                 }
                 const data = await response.json(); // Parse JSON data
                 setFetchedUser(data); // Update state with fetched data
-                console.log("fectched user:", data);
             } catch (error) {
                 console.error(`Could not get User Info: ${error}`);
                 throw error;
@@ -33,7 +32,6 @@ export function useUserInfoFetching(authToken: string) {
                 setIsLoadingUser(false); // Set loading to false after fetching is complete
             }
         };
-        // console.log("fetching posts from api");
         fetchPosts();
     }, [ authToken ]);
 

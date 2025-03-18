@@ -6,9 +6,7 @@ import "./LoginPage.css";
 export function LoginPage({ onValidLogin }) { //: {onValidLogin: React.Dispatch<React.SetStateAction<string>>}
     const navigate = useNavigate();
     const submissionHandler = async (username, password) => { //(username: string , password: string)
-        console.log("From Within Login Page.")
-        console.log("username:", username);
-        console.log("password:", password);
+
         const response = await sendPostRequest("/auth/login", { username: username, password: password });
 
         console.log(response.status);
@@ -18,7 +16,7 @@ export function LoginPage({ onValidLogin }) { //: {onValidLogin: React.Dispatch<
                 message: response.body.message,
             };
         }
-        console.log(response.body.token);
+
         onValidLogin(response.body.token);
         navigate("/");
         return;
