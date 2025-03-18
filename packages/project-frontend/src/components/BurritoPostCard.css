@@ -34,12 +34,34 @@
 
 .burrito-image {
   width: 100%;
+  /* Maintain aspect ratio */
   height: 12.5rem; /* 200px */
   object-fit: cover;
   border-radius: 0.75rem; /* 12px */
 }
 
-.burrito-title {
+.burrito-image.expanded-true {
+  height: auto; 
+  width: auto;
+  max-height: 30rem;
+  margin: auto;
+}
+
+.burrito-title.expanded-false {
+  font-size: 1.25rem; /* Same */
+  font-weight: bold;
+  color: var(--color-text);
+  margin-top: 0.75rem; /* 12px */
+  display: -webkit-box;
+  line-clamp: 1;
+  -webkit-line-clamp: 1; /* Limits to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.burrito-title.expanded-true {
   font-size: 1.25rem; /* Same */
   font-weight: bold;
   color: var(--color-text);

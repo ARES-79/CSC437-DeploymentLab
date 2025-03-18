@@ -3,11 +3,11 @@ import { User, UpdateUserData } from "./types/user";
 export class UserProvider {
     constructor(private readonly mongoClient: MongoClient) { }
 
-    async getUser(userId: string): Promise<User | false> {
+    async getUser(username: string): Promise<User | false> {
         const db = this.mongoClient.db();
         const usersCollection = db.collection<User>(process.env.USERS_COLLECTION_NAME || "users");
 
-        const filter = { _id: userId };
+        const filter = { username: username };
 
         const user = await usersCollection.findOne(filter);
 

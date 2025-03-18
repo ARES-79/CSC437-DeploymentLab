@@ -30,9 +30,9 @@ const BurritoPostCard = ({ post, currentUserId, expandedContent }) => {
       </Link>
 
       <Link to={`/posts/${post._id}`}>     
-      <img src={image} alt={title} className="burrito-image" />
+      <img src={image} alt={title} className={`burrito-image expanded-${expandedContent}`}/>
 
-      <h2 className="burrito-title">{title}</h2>
+      <h2 className={`burrito-title expanded-${expandedContent}`}>{title}</h2>
 
       {/* FontAwesome Star Rating */}
       <div className="burrito-rating">

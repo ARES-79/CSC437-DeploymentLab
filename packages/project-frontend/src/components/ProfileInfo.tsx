@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import './ProfileInfo.css';
-import { useImageGeneration } from "../utils/useImageGeneration";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { Loading } from "./Loading";

@@ -34,7 +34,10 @@ export function registerPostRoutes(app: express.Application, mongoClient: MongoC
             console.log("file:", req.file);
             console.log("title:", req.body.title);
             console.log("description:", req.body.description);
-            if (!req.file || !req.body.title || !req.body.description) {
+            console.log("type:", req.body.type);
+            console.log("ingredients:", req.body.ingredients);
+            console.log("ingredients ? :", req.body.ingredients ? true : false);
+            if (!req.file || !req.body.title || !req.body.description || !req.body.type) {
                 res.status(400).json({
                     error: "Bad request",
                     message: "Missing required field.",
@@ -50,19 +53,19 @@ export function registerPostRoutes(app: express.Application, mongoClient: MongoC
                 description: req.body.description,
                 type: req.body.type,
                 rating: req.body.rating,
-                price: req.body.price,
-                location: req.body.location,
-                restaurant: req.body.restaurant,
-                ingredients: req.body.ingredients ? req.body.ingredients.split(",").map((i: string) => i.trim()) : []
+                ...(req.body.price !== undefined && { price: req.body.price }),
+                ...(req.body.location !== undefined && { location: req.body.location }),
+                ...(req.body.restaurant !== undefined && { restaurant: req.body.restaurant }),
+                ...(req.body.ingredients !== undefined && { ingredients: req.body.ingredients.split(",").map((i: string) => i.trim()) })
             }
-            const postProvider = new PostProvider(mongoClient); 
+            const postProvider = new PostProvider(mongoClient);
             const result = await postProvider.createPost(postDoc);
 
-            if(result){
+            if (result) {
                 res.status(201).send(postDoc);
                 return;
-            } else{
-                 // Final handler function after the above two middleware functions finish running
+            } else {
+                // Final handler function after the above two middleware functions finish running
                 res.status(500).send("Error uploading the image.");
             }
         }

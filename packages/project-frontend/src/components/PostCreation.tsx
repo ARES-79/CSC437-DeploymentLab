@@ -1,33 +1,23 @@
 import React, { useState } from "react";
 import { useActionState } from "react";
 import "./PostCreation.css";
-import { NewPostSubmission } from "../types/post";
 import { User } from "../types/user";
 import { Loading } from "./Loading";
 import { ImageUploader } from "./ImageUploader";
 
 
-const PostCreation = ({ user, authToken }: { user: User, authToken?: String }) => {
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
-    // const [ingredients, setIngredients] = useState("");
-    // const [rating, setRating] = useState<number | "">("");
-    // const [type, setType] = useState<"purchased" | "homemade">("homemade"); // "homemade" or "purchased"
-    // const [price, setPrice] = useState("");
-    // const [location, setLocation] = useState(user?.location || '');
-    // const [restaurant, setRestaurant] = useState("");
-
-    // const [error, setError] = useState("");
+const PostCreation = ({ user, authToken }: { user: User, authToken: String }) => {
+   
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [type, setType] = useState<"purchased" | "homemade">("homemade"); // "homemade" or "purchased"
 
     const [result, submitAction, isPending] = useActionState(
-        async (state: { type: string; message: string; } | null, formData: FormData) => {
+        async (prevState: { type: string; message: string; } | null, formData: FormData) => {
             const title = (formData.get("title") as string)?.trim() || "";
             const description = (formData.get("description") as string)?.trim() || "";
             const rating = formData.get("rating");
-            const ingredients = (formData.get("ingredients") as string)?.split(",").map(ingr => ingr.trim());
+            const ingredients = (formData.get("ingredients") as string)?.trim();
             const price = formData.get("price");
             const location = formData.get("location");
             const restaurant = formData.get("restaurant");
@@ -59,8 +49,14 @@ const PostCreation = ({ user, authToken }: { user: User, authToken?: String }) =
             formData.append("type", type);
             formData.append("image", imageFile);
             formData.append("createdBy", user._id);
-
-            console.log("image file in form data", formData.get("image"));
+            if (!ingredients){
+                formData.delete("ingredients");
+            }
+            if (type === "homemade"){
+                formData.delete("price");
+                formData.delete("location");
+                formData.delete("restaurant");
+            }
 
             try {
                 console.log("attempting fetch");
@@ -84,70 +80,8 @@ const PostCreation = ({ user, authToken }: { user: User, authToken?: String }) =
             }
             setImageSrc(null);
             setImageFile(null);
-            // const newPost = {
-            //     createdBy: user._id,
-            //     title,
-            //     description,
-            //     image: imageUrl,
-            //     rating,
-            //     ingredients: ingredients ? ingredients.split(",").map((i: string) => i.trim()) : [],
-            //     type,
-            //     ...(type === "purchased" && { price, location, restaurant }),
-            // };
-
-            // onSubmit(newPost);
-
             return { type: "success", message: "Post created successfully!" };
         }, null);
-
-    // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     if (!title.trim() || !description.trim()) {
-    //         setError("Title and description are required.");
-    //         return;
-    //     }
-
-    //     if (type === "purchased" && (!price.trim() || !location.trim() || !restaurant.trim())) {
-    //         setError("Price, location, and restaurant are required for purchased burritos.");
-    //         return;
-    //     }
-
-    //     if (rating === "" || rating < 0 || rating > 5) {
-    //         setError("Please provide a rating between 0 and 5.");
-    //         return;
-    //     }
-
-    //     if (!imageSrc) {
-    //         setError("Please upload an image before submitting.");
-    //         return;
-    //     }
-
-    //     setError("");
-
-    //     const newPost: NewPostSubmission = {
-    //         //post id will have to be generated
-    //         createdBy: user._id,
-    //         title,
-    //         description,
-    //         image: imageSrc,
-    //         rating: rating.toString(),
-    //         ingredients: ingredients.split(",").map(ingr => ingr.trim()), // Convert comma-separated ingredients to array
-    //         type,
-    //         ...(type === "purchased" && { price, location, restaurant }), // Include only if purchased
-    //     };
-
-    //     onSubmit(newPost); // Call function to handle post submission
-
-    //     setTitle("");
-    //     setDescription("");
-    //     setRating("");
-    //     setIngredients("");
-    //     setPrice("");
-    //     setLocation("");
-    //     setRestaurant("");
-    //     setType("homemade");
-    //     setImageSrc("");
-    // };
 
     return (
         <div className="post-creation">
@@ -229,6 +163,7 @@ const PostCreation = ({ user, authToken }: { user: User, authToken?: String }) =
                         <input
                             type="text"
                             id="Location"
+                            defaultValue={user.location}
                             name="location"
                             required={type === "purchased"}
                         />
@@ -240,8 +175,6 @@ const PostCreation = ({ user, authToken }: { user: User, authToken?: String }) =
                             name="restaurant"
                             required={type === "purchased"}
                         />
-
-                        <button>Submit</button>
                     </>
                 )}
 

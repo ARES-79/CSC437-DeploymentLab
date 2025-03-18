@@ -10,23 +10,31 @@ import { UpdateUserData } from "../types/user";
 // PATCH /api/users/:id
 
 export function registerUserRoutes(app: express.Application, mongoClient: MongoClient) {
-    app.get("/api/users/:userId", (req: Request, res: Response) => {
+    app.get("/api/user", (req: Request, res: Response) => {
 
-        const { userId } = req.params;
+
+        const username = res.locals.token.username; //from decoded auth token
         const userProvider = new UserProvider(mongoClient);
 
-        userProvider.getUser(userId)
+        console.log("token at user info request time:", username);
+
+        userProvider.getUser(username)
             .then(
                 user => {
                     if (!user) {
-                        res.status(400).json({ error: `User with _id ${userId} does not exist.` })
+                        console.log("Issue getting user.");
+                        res.status(400).json({
+                            error: "Bad request",
+                            message: `User with username ${username} does not exist.`
+                        })
                     } else {
                         res.json(user);
                     }
                 }
             ).catch(error => {
                 console.error("Error fetching user data:", error);
-                res.status(500).json({ error: "Internal Server Error" });
+                res.status(500).json({ error: "Internal Error",
+                    message: "Internal Server Error" });
             });
     });
 

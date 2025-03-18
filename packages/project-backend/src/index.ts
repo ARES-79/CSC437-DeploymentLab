@@ -33,7 +33,7 @@ async function setUpServer() {
   app.use(express.static(staticDir));
   app.use("/uploads", express.static(imageDir));
   app.use(express.json());
-  // app.use("/api/*", verifyAuthToken);
+  app.use("/api/*", verifyAuthToken);
 
   app.get("/hello", (req: Request, res: Response) => {
     res.send("Hello, World");

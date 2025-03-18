@@ -5,11 +5,11 @@ import ProfileInfo from "../components/ProfileInfo.js";
 import { profilePageProps } from "../types/profileProps.js";
 
 
-const ProfilePage = ({ user: currentUser, updateUser, isDarkMode, handleDarkModeToggle }: profilePageProps) => {
+const ProfilePage = ({ user: currentUser, updateUser, isDarkMode, handleDarkModeToggle, authToken }: profilePageProps) => {
     const { userId } = useParams();
     const location = useLocation();
     const isCurrentUser = userId === undefined;
-    const { isLoading, fetchedPosts } = usePostFetching("", isCurrentUser ? currentUser._id : userId, "");
+    const { isLoading, fetchedPosts } = usePostFetching("", isCurrentUser ? currentUser._id : userId, authToken);
     const username = location.state?.username || "Unknown User";
 
     return (

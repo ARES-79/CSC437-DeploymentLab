@@ -12,4 +12,5 @@ export interface profilePageProps{
     updateUser?: (user: UpdateUserData) => void;
     isDarkMode?: boolean;
     handleDarkModeToggle?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    authToken: string;
 }

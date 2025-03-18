@@ -14,19 +14,19 @@ interface PostGalleryProps {
 export function PostGallery({ header, currentUserId, isLoading, fetchedPosts, expandedContent }: PostGalleryProps) {
 
     const postElements = fetchedPosts.map((post) => (
-            <BurritoPostCard 
-                key={post._id}
-                post={post}
-                currentUserId={currentUserId}
-                expandedContent={expandedContent}
-            />
+        <BurritoPostCard
+            key={post._id}
+            post={post}
+            currentUserId={currentUserId}
+            expandedContent={expandedContent}
+        />
     ));
     return (
         <>
             <h2 className="header"> {header} </h2>
-            {isLoading && <Loading/>}
+            {isLoading && <Loading />}
             <ul className="cards">
-                {postElements}
+                {(!isLoading && postElements.length == 0) ? <li className='no-posts'>No posts yet.</li> : postElements}
             </ul>
         </>
     );
