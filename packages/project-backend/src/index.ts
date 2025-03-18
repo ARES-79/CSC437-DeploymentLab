@@ -43,18 +43,18 @@ async function setUpServer() {
   registerAuthRoutes(app, mongoClient);
   registerUserRoutes(app, mongoClient);
 
-  // app.get("*", (req: Request, res: Response) => {
-  //   console.log("none of the routes above me were matched");
-  //   // const staticDirPath = path.resolve(__dirname, "../" + staticDir + "index.html");
+  app.get("*", (req: Request, res: Response) => {
+    console.log("none of the routes above me were matched");
+    // const staticDirPath = path.resolve(__dirname, "../" + staticDir + "index.html");
 
-  //   res.sendFile("index.html", options, (err) => {
-  //     if (err) {
-  //       console.error(err);
-  //     } else {
-  //       console.log('Sent: index.html');
-  //     }
-  //   })
-  // });
+    res.sendFile("index.html", options, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('Sent: index.html');
+      }
+    })
+  });
 
   app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
