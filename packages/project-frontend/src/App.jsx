@@ -28,14 +28,7 @@ function App() {
 
   const [authToken, setAuthToken] = useState("");
   const { isLoading, fetchedPosts } = usePostFetching("", "", authToken);
-  const { isLoadinguser, fetchedUser } = useUserInfoFetching(authToken);
-  // const [fetchedUser, setUser] = useState({ //<User>
-  //   _id: '67d74fd97c57ea3505e096df',
-  //   username: 'burritoMaster123',
-  //   // profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg',
-  //   location: 'San Diego, CA',
-  //   darkMode: false,
-  // });
+  const { isLoadinguser, fetchedUser, setFetchedUser } = useUserInfoFetching(authToken);
 
   useEffect(() => {
     if (fetchedUser.darkMode) {
@@ -51,7 +44,7 @@ function App() {
   };
 
   const updateUser = (updatedFields) => { //: UpdateUserData
-    setUser((prevUser) => ({
+    setFetchedUser((prevUser) => ({
       ...prevUser,
       ...updatedFields,  // Merge only the updated fields
     }));

@@ -10,6 +10,7 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }: pro
     const [isEditing, setIsEditing] = useState(false);
     const [newUsername, setNewUsername] = useState(user.username);
     const [newLocation, setNewLocation] = useState(user.location);
+    const [imageFile, setImageFile] = useState<File | null>(null)
     const [imageUrl, setImageUrl] = useState(user.profilePicture);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -25,16 +26,6 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }: pro
             fileInputRef.current?.click(); // Open file explorer only in editing mode
         }
     };
-
-    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-
-    //     const files = event.target.files; // Fix type error
-    //     if (files && files.length > 0) {
-    //         const url = URL.createObjectURL(files[0]);
-    //         setImageUrl(url);
-    //         updateUser({ ...user, profilePicture: url }); // Update user profile picture
-    //     }
-    // };
 
     function readAsDataURL(file: File): Promise<string> {
         return new Promise((resolve, reject) => {
@@ -52,6 +43,7 @@ const ProfileInfo = ({ user, updateUser, isDarkMode, handleDarkModeToggle }: pro
         const inputElement = e.target;
         if (inputElement.files && inputElement.files[0]) {
             const fileObj = inputElement.files[0];
+            setImageFile(fileObj)
 
             // Pass the file object to `readAsDataURL` and set the image URL
             readAsDataURL(fileObj).then((newImgSrc) => {

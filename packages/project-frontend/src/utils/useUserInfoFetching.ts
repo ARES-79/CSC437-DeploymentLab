@@ -39,5 +39,5 @@ export function useUserInfoFetching(authToken: string) {
         fetchPosts();
     }, [ authToken ]);
 
-    return { isLoadingUser, fetchedUser };
+    return { isLoadingUser, fetchedUser, setFetchedUser };
 }
