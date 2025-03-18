@@ -126,7 +126,6 @@ export function usePostFetching(postId: string, userId: string, authToken: strin
                 setIsLoading(false); // Set loading to false after fetching is complete
             }
         };
-        // console.log("fetching posts from api");
         fetchPosts();
     }, [postId, userId, authToken]);
 

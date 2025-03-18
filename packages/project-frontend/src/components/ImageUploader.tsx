@@ -38,13 +38,11 @@ export function ImageUploader({ imageUrl, setImageUrl, setImageFile }: ImageUplo
         const inputElement = e.target;
         if (inputElement.files && inputElement.files[0]) {
             const fileObj = inputElement.files[0];
-            // console.log("image sile on selection:", fileObj);
 
             setImageFile(fileObj);
             
             // Pass the file object to `readAsDataURL` and set the image URL
             readAsDataURL(fileObj).then((newImgSrc) => {
-                // console.log("New Image Src:", newImgSrc);
                 setImageUrl(newImgSrc);  // Assuming `setImageUrl` is a state setter
             }).catch((err) => {
                 console.error('Error reading file:', err);

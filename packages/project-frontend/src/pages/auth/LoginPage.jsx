@@ -9,7 +9,6 @@ export function LoginPage({ onValidLogin }) { //: {onValidLogin: React.Dispatch<
 
         const response = await sendPostRequest("/auth/login", { username: username, password: password });
 
-        console.log(response.status);
         if (response.status == 401 || response.status == 500) {
             return {
                 type: "error",

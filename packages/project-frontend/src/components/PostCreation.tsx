@@ -22,8 +22,6 @@ const PostCreation = ({ user, authToken }: { user: User, authToken: String }) =>
             const location = formData.get("location");
             const restaurant = formData.get("restaurant");
 
-            console.log("please log");
-
             if (!title || !description || !rating) {
                 return {
                     type: "error",
@@ -38,7 +36,6 @@ const PostCreation = ({ user, authToken }: { user: User, authToken: String }) =>
                 };
             }
 
-            console.log(imageFile);
             if (!imageFile?.name) {
                 return {
                     type: "error",
@@ -59,7 +56,6 @@ const PostCreation = ({ user, authToken }: { user: User, authToken: String }) =>
             }
 
             try {
-                console.log("attempting fetch");
                 const response = await fetch("/api/posts", {
                     method: "POST",
                     body: formData,

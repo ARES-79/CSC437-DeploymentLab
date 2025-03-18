@@ -10,7 +10,6 @@ export async function submitUpdatedInfo(
 
     const updateData = new FormData;
 
-    console.log("image file in request handler", imageFile);
     if (data.profilePicture && imageFile?.name) {
         updateData.append("image", imageFile);
     }

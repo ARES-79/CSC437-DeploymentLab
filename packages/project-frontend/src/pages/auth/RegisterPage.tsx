@@ -8,7 +8,6 @@ export function RegisterPage({ onValidRegister } : {onValidRegister: React.Dispa
     const submissionHandler = async (username: string, password: string, location?: string ) => {
 
         const response = await sendPostRequest("/auth/register", { username: username, password: password, location: location });
-        console.log(response.status);
         if (response.status == 400 || response.status == 500) {
             return {
                 type: "error",
